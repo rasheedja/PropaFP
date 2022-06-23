@@ -1,0 +1,60 @@
+Bounds on variables: 
+onesin1 (Real) in [-8053065 / 16777216, 1006633 / 2097152]
+twosin1 (Real) in [-8053065 / 16777216, 1006633 / 2097152]
+x (Real) in [-1 / 2, 1 / 2]
+
+exact NVC: 
+1 <= (cos 0)
+
+0 == (sin 0)
+
+(cos Pi) <= (-1 * 1)
+
+0 == (sin Pi)
+
+0 == (cos ((5 / 10) * Pi))
+
+1 <= (sin ((5 / 10) * Pi))
+
+((-1 * 48) * (1 / 100)) <= onesin1
+
+onesin1 <= (48 * (1 / 100))
+
+IMPL
+  0 <= ((sin x) + (-1 * onesin1))
+  ===========>
+  ((sin x) + (-1 * onesin1)) <= (25889 * (1 / 100000000))
+
+IMPL
+  NOT
+    0 <= ((sin x) + (-1 * onesin1))
+  ===========>
+  (-1 * ((sin x) + (-1 * onesin1))) <= (25889 * (1 / 100000000))
+
+((-1 * 48) * (1 / 100)) <= twosin1
+
+twosin1 <= (48 * (1 / 100))
+
+IMPL
+  0 <= ((sin onesin1) + (-1 * twosin1))
+  ===========>
+  ((sin onesin1) + (-1 * twosin1)) <= (25889 * (1 / 100000000))
+
+IMPL
+  NOT
+    0 <= ((sin onesin1) + (-1 * twosin1))
+  ===========>
+  (-1 * ((sin onesin1) + (-1 * twosin1))) <= (25889 * (1 / 100000000))
+
+NOT
+  AND
+    IMPL
+      0 <= ((sin (sin x)) + (-1 * twosin1))
+      ===========>
+      ((sin (sin x)) + (-1 * twosin1)) <= (52 * (1 / 100000))
+    IMPL
+      NOT
+        0 <= ((sin (sin x)) + (-1 * twosin1))
+      ===========>
+      (-1 * ((sin (sin x)) + (-1 * twosin1))) <= (52 * (1 / 100000))
+

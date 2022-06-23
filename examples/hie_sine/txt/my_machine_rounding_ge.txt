@@ -1,0 +1,7 @@
+Bounds on variables: 
+x (Real) in [0, 511]
+
+exact NVC: 
+
+		NOT
+			((-1 * 500000001) * (1 / 1000000000)) <= (x + (-1 * (rndToInt_ta x)))

@@ -1,0 +1,21 @@
+Start: taylor_sin_plus
+delta-sat with delta = 1e-100
+(model
+  (define-fun x () Real -0.16650390625)
+)
+0:00.00
+End:   taylor_sin_plus
+Start: taylor_sin_swap
+delta-sat with delta = 1e-100
+(model
+  (define-fun x () Real 0.3333282470703125)
+)
+0:00.02
+End:   taylor_sin_swap
+Start: taylor_sin_tight
+delta-sat with delta = 1e-100
+(model
+  (define-fun x () Real 0.49999268841929734)
+)
+0:00.01
+End:   taylor_sin_tight

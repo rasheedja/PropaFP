@@ -1,0 +1,117 @@
+Start: my_machine_rounding_ge
+0:00.52
+End:   my_machine_rounding_ge
+Start: my_machine_rounding_le
+0:00.51
+End:   my_machine_rounding_le
+Start: reduce_half_pi_overflow_1
+0:00.03
+End:   reduce_half_pi_overflow_1
+Start: reduce_half_pi_overflow_2
+0:00.02
+End:   reduce_half_pi_overflow_2
+Start: reduce_half_pi_x_ge
+0:01.68
+End:   reduce_half_pi_x_ge
+Start: reduce_half_pi_x_le
+0:01.69
+End:   reduce_half_pi_x_le
+Start: reduce_half_pi_ge
+1:05.04
+End:   reduce_half_pi_ge
+Start: reduce_half_pi_le
+1:04.72
+End:   reduce_half_pi_le
+Start: approx_sin_ge
+0:01.91
+End:   approx_sin_ge
+Start: approx_sin_ge_b1
+0:01.88
+End:   approx_sin_ge_b1
+Start: approx_sin_ge_b2
+0:01.89
+End:   approx_sin_ge_b2
+Start: approx_sin_ge_b3
+0:01.86
+End:   approx_sin_ge_b3
+Start: approx_sin_le
+0:01.88
+End:   approx_sin_le
+Start: approx_sin_le_b1
+0:01.86
+End:   approx_sin_le_b1
+Start: approx_sin_le_b2
+0:01.91
+End:   approx_sin_le_b2
+Start: approx_sin_le_b3
+0:01.89
+End:   approx_sin_le_b3
+Start: approx_cos_ge
+0:00.96
+End:   approx_cos_ge
+Start: approx_cos_ge_b1
+0:00.98
+End:   approx_cos_ge_b1
+Start: approx_cos_ge_b2
+0:00.99
+End:   approx_cos_ge_b2
+Start: approx_cos_ge_b3
+0:00.98
+End:   approx_cos_ge_b3
+Start: approx_cos_le
+0:00.96
+End:   approx_cos_le
+Start: approx_cos_le_b1
+0:00.96
+End:   approx_cos_le_b1
+Start: approx_cos_le_b2
+0:00.97
+End:   approx_cos_le_b2
+Start: approx_cos_le_b3
+0:00.97
+End:   approx_cos_le_b3
+Start: taylor_sin
+0:02.05
+End:   taylor_sin
+Start: taylor_sin_double
+0:02.07
+End:   taylor_sin_double
+Start: taylor_sin_p_x_ge
+0:00.91
+End:   taylor_sin_p_x_ge
+Start: taylor_sin_p_x_le
+0:00.90
+End:   taylor_sin_p_x_le
+Start: taylor_sin_p
+0:02.11
+End:   taylor_sin_p
+Start: sinsin_onesin_pre_ge
+0:00.53
+End:   sinsin_onesin_pre_ge
+Start: sinsin_onesin_pre_le
+0:00.02
+End:   sinsin_onesin_pre_le
+Start: sinsin
+0:00.54
+End:   sinsin
+Start: sinsin_b1
+0:00.55
+End:   sinsin_b1
+Start: sinsin_b2
+0:00.54
+End:   sinsin_b2
+Start: sinsin_b3
+0:00.54
+End:   sinsin_b3
+Start: heron_init
+0:02.04
+End:   heron_init
+Start: heron_pres
+0:03.05
+End:   heron_pres
+Start: sin_ge
+0:01.29
+End:   sin_ge
+Start: sin_le
+0:01.27
+End:   sin_le
