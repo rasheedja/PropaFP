@@ -1,87 +1,57 @@
 ----------==========----------
-Start: reduce_half_pi_overflow_1
-Z3 version 4.3.1
-Generated Include List
-Axioms/trans.ax
-Axioms/general.ax
-----------------------------
-SZS status Theorem for /home/junaid/Research/git/sinepaper/smtFiles/newFiles/metit/reduce_half_pi_overflow_1.tptp
-Processor time: 0.003 = 0.000 (Metis) + 0.003 (RCF)
-Maximum weight in proof search: 0
-0:00.04
-End:   reduce_half_pi_overflow_1
-----------==========----------
-----------==========----------
-Start: reduce_half_pi_overflow_2
-Z3 version 4.3.1
-Generated Include List
-Axioms/trans.ax
-Axioms/general.ax
-----------------------------
-SZS status Theorem for /home/junaid/Research/git/sinepaper/smtFiles/newFiles/metit/reduce_half_pi_overflow_2.tptp
-Processor time: 0.007 = 0.005 (Metis) + 0.002 (RCF)
-Maximum weight in proof search: 0
-0:00.02
-End:   reduce_half_pi_overflow_2
-----------==========----------
-----------==========----------
 Start: reduce_half_pi_x_ge
 Z3 version 4.3.1
 Generated Include List
+Axioms/trans.ax
 Axioms/general.ax
-Axioms/cos-extended2.ax
-Axioms/pi.ax
-Axioms/sin-extended2.ax
 ----------------------------
-SZS status Theorem for /home/junaid/Research/git/sinepaper/smtFiles/newFiles/metit/reduce_half_pi_x_ge.tptp
-Processor time: 0.020 = 0.008 (Metis) + 0.012 (RCF)
+SZS status Theorem for /home/junaid/Research/git/sinepaper/smtFiles/updFiles/metit/reduce_half_pi_x_ge.tptp
+Processor time: 0.007 = 0.000 (Metis) + 0.007 (RCF)
 Maximum weight in proof search: 0
-0:00.04
+0:00.07
 End:   reduce_half_pi_x_ge
 ----------==========----------
 ----------==========----------
 Start: reduce_half_pi_x_le
 Z3 version 4.3.1
 Generated Include List
+Axioms/trans.ax
 Axioms/general.ax
-Axioms/cos-extended2.ax
-Axioms/pi.ax
-Axioms/sin-extended2.ax
 ----------------------------
-SZS status Theorem for /home/junaid/Research/git/sinepaper/smtFiles/newFiles/metit/reduce_half_pi_x_le.tptp
-Processor time: 0.022 = 0.009 (Metis) + 0.013 (RCF)
+SZS status Theorem for /home/junaid/Research/git/sinepaper/smtFiles/updFiles/metit/reduce_half_pi_x_le.tptp
+Processor time: 0.015 = 0.003 (Metis) + 0.011 (RCF)
 Maximum weight in proof search: 0
-0:00.05
+0:00.04
 End:   reduce_half_pi_x_le
 ----------==========----------
 ----------==========----------
 Start: reduce_half_pi_ge
 Z3 version 4.3.1
 Generated Include List
+Axioms/trans.ax
 Axioms/general.ax
-Axioms/cos-extended2.ax
 Axioms/pi.ax
-Axioms/sin-extended2.ax
 ----------------------------
-SZS status Theorem for /home/junaid/Research/git/sinepaper/smtFiles/newFiles/metit/reduce_half_pi_ge.tptp
-Processor time: 0.054 = 0.015 (Metis) + 0.039 (RCF)
-Maximum weight in proof search: 300
-0:00.09
+.............................SZS status GaveUp for /home/junaid/Research/git/sinepaper/smtFiles/updFiles/metit/reduce_half_pi_ge.tptp
+Processor time: 300.311 = 299.089 (Metis) + 1.222 (RCF)
+Maximum weight in proof search: 1999
+Command exited with non-zero status 1
+4:57.30
 End:   reduce_half_pi_ge
 ----------==========----------
 ----------==========----------
 Start: reduce_half_pi_le
 Z3 version 4.3.1
 Generated Include List
+Axioms/trans.ax
 Axioms/general.ax
-Axioms/cos-extended2.ax
 Axioms/pi.ax
-Axioms/sin-extended2.ax
 ----------------------------
-SZS status Theorem for /home/junaid/Research/git/sinepaper/smtFiles/newFiles/metit/reduce_half_pi_le.tptp
-Processor time: 0.160 = 0.028 (Metis) + 0.132 (RCF)
-Maximum weight in proof search: 303
-0:00.19
+.............................SZS status GaveUp for /home/junaid/Research/git/sinepaper/smtFiles/updFiles/metit/reduce_half_pi_le.tptp
+Processor time: 299.443 = 298.199 (Metis) + 1.245 (RCF)
+Maximum weight in proof search: 1999
+Command exited with non-zero status 1
+4:56.93
 End:   reduce_half_pi_le
 ----------==========----------
 ----------==========----------
@@ -90,14 +60,12 @@ Z3 version 4.3.1
 Generated Include List
 Axioms/general.ax
 Axioms/abs.ax
-Axioms/cos-extended2.ax
-Axioms/pi.ax
 Axioms/sin-extended2.ax
 ----------------------------
-SZS status Theorem for /home/junaid/Research/git/sinepaper/smtFiles/newFiles/metit/approx_sin_ge.tptp
-Processor time: 0.594 = 0.238 (Metis) + 0.357 (RCF)
-Maximum weight in proof search: 491
-0:00.71
+SZS status Theorem for /home/junaid/Research/git/sinepaper/smtFiles/updFiles/metit/approx_sin_ge.tptp
+Processor time: 0.111 = 0.020 (Metis) + 0.091 (RCF)
+Maximum weight in proof search: 382
+0:00.17
 End:   approx_sin_ge
 ----------==========----------
 ----------==========----------
@@ -106,14 +74,12 @@ Z3 version 4.3.1
 Generated Include List
 Axioms/general.ax
 Axioms/abs.ax
-Axioms/cos-extended2.ax
-Axioms/pi.ax
 Axioms/sin-extended2.ax
 ----------------------------
-SZS status Theorem for /home/junaid/Research/git/sinepaper/smtFiles/newFiles/metit/approx_sin_ge_b1.tptp
-Processor time: 0.598 = 0.227 (Metis) + 0.371 (RCF)
-Maximum weight in proof search: 491
-0:00.73
+SZS status Theorem for /home/junaid/Research/git/sinepaper/smtFiles/updFiles/metit/approx_sin_ge_b1.tptp
+Processor time: 0.120 = 0.031 (Metis) + 0.089 (RCF)
+Maximum weight in proof search: 382
+0:00.16
 End:   approx_sin_ge_b1
 ----------==========----------
 ----------==========----------
@@ -122,14 +88,12 @@ Z3 version 4.3.1
 Generated Include List
 Axioms/general.ax
 Axioms/abs.ax
-Axioms/cos-extended2.ax
-Axioms/pi.ax
 Axioms/sin-extended2.ax
 ----------------------------
-SZS status Theorem for /home/junaid/Research/git/sinepaper/smtFiles/newFiles/metit/approx_sin_ge_b2.tptp
-Processor time: 0.572 = 0.229 (Metis) + 0.343 (RCF)
-Maximum weight in proof search: 491
-0:00.69
+SZS status Theorem for /home/junaid/Research/git/sinepaper/smtFiles/updFiles/metit/approx_sin_ge_b2.tptp
+Processor time: 0.109 = 0.031 (Metis) + 0.078 (RCF)
+Maximum weight in proof search: 382
+0:00.15
 End:   approx_sin_ge_b2
 ----------==========----------
 ----------==========----------
@@ -138,14 +102,12 @@ Z3 version 4.3.1
 Generated Include List
 Axioms/general.ax
 Axioms/abs.ax
-Axioms/cos-extended2.ax
-Axioms/pi.ax
 Axioms/sin-extended2.ax
 ----------------------------
-SZS status Theorem for /home/junaid/Research/git/sinepaper/smtFiles/newFiles/metit/approx_sin_ge_b3.tptp
-Processor time: 0.583 = 0.233 (Metis) + 0.349 (RCF)
-Maximum weight in proof search: 491
-0:00.70
+SZS status Theorem for /home/junaid/Research/git/sinepaper/smtFiles/updFiles/metit/approx_sin_ge_b3.tptp
+Processor time: 0.124 = 0.030 (Metis) + 0.094 (RCF)
+Maximum weight in proof search: 382
+0:00.16
 End:   approx_sin_ge_b3
 ----------==========----------
 ----------==========----------
@@ -154,14 +116,12 @@ Z3 version 4.3.1
 Generated Include List
 Axioms/general.ax
 Axioms/abs.ax
-Axioms/cos-extended2.ax
-Axioms/pi.ax
 Axioms/sin-extended2.ax
 ----------------------------
-SZS status Theorem for /home/junaid/Research/git/sinepaper/smtFiles/newFiles/metit/approx_sin_le.tptp
-Processor time: 0.605 = 0.237 (Metis) + 0.368 (RCF)
-Maximum weight in proof search: 491
-0:00.74
+SZS status Theorem for /home/junaid/Research/git/sinepaper/smtFiles/updFiles/metit/approx_sin_le.tptp
+Processor time: 0.130 = 0.042 (Metis) + 0.088 (RCF)
+Maximum weight in proof search: 382
+0:00.16
 End:   approx_sin_le
 ----------==========----------
 ----------==========----------
@@ -170,14 +130,12 @@ Z3 version 4.3.1
 Generated Include List
 Axioms/general.ax
 Axioms/abs.ax
-Axioms/cos-extended2.ax
-Axioms/pi.ax
 Axioms/sin-extended2.ax
 ----------------------------
-SZS status Theorem for /home/junaid/Research/git/sinepaper/smtFiles/newFiles/metit/approx_sin_le_b1.tptp
-Processor time: 0.596 = 0.232 (Metis) + 0.365 (RCF)
-Maximum weight in proof search: 491
-0:00.74
+SZS status Theorem for /home/junaid/Research/git/sinepaper/smtFiles/updFiles/metit/approx_sin_le_b1.tptp
+Processor time: 0.112 = 0.026 (Metis) + 0.086 (RCF)
+Maximum weight in proof search: 382
+0:00.15
 End:   approx_sin_le_b1
 ----------==========----------
 ----------==========----------
@@ -186,14 +144,12 @@ Z3 version 4.3.1
 Generated Include List
 Axioms/general.ax
 Axioms/abs.ax
-Axioms/cos-extended2.ax
-Axioms/pi.ax
 Axioms/sin-extended2.ax
 ----------------------------
-SZS status Theorem for /home/junaid/Research/git/sinepaper/smtFiles/newFiles/metit/approx_sin_le_b2.tptp
-Processor time: 0.605 = 0.238 (Metis) + 0.367 (RCF)
-Maximum weight in proof search: 491
-0:00.73
+SZS status Theorem for /home/junaid/Research/git/sinepaper/smtFiles/updFiles/metit/approx_sin_le_b2.tptp
+Processor time: 0.104 = 0.022 (Metis) + 0.082 (RCF)
+Maximum weight in proof search: 382
+0:00.14
 End:   approx_sin_le_b2
 ----------==========----------
 ----------==========----------
@@ -202,14 +158,12 @@ Z3 version 4.3.1
 Generated Include List
 Axioms/general.ax
 Axioms/abs.ax
-Axioms/cos-extended2.ax
-Axioms/pi.ax
 Axioms/sin-extended2.ax
 ----------------------------
-SZS status Theorem for /home/junaid/Research/git/sinepaper/smtFiles/newFiles/metit/approx_sin_le_b3.tptp
-Processor time: 0.583 = 0.210 (Metis) + 0.373 (RCF)
-Maximum weight in proof search: 491
-0:00.73
+SZS status Theorem for /home/junaid/Research/git/sinepaper/smtFiles/updFiles/metit/approx_sin_le_b3.tptp
+Processor time: 0.112 = 0.027 (Metis) + 0.086 (RCF)
+Maximum weight in proof search: 382
+0:00.14
 End:   approx_sin_le_b3
 ----------==========----------
 ----------==========----------
@@ -218,13 +172,11 @@ Z3 version 4.3.1
 Generated Include List
 Axioms/general.ax
 Axioms/cos-extended2.ax
-Axioms/pi.ax
-Axioms/sin-extended2.ax
 ----------------------------
-SZS status Theorem for /home/junaid/Research/git/sinepaper/smtFiles/newFiles/metit/approx_cos_ge.tptp
-Processor time: 0.355 = 0.129 (Metis) + 0.225 (RCF)
-Maximum weight in proof search: 377
-0:00.43
+SZS status Theorem for /home/junaid/Research/git/sinepaper/smtFiles/updFiles/metit/approx_cos_ge.tptp
+Processor time: 0.015 = 0.005 (Metis) + 0.010 (RCF)
+Maximum weight in proof search: 303
+0:00.04
 End:   approx_cos_ge
 ----------==========----------
 ----------==========----------
@@ -233,13 +185,11 @@ Z3 version 4.3.1
 Generated Include List
 Axioms/general.ax
 Axioms/cos-extended2.ax
-Axioms/pi.ax
-Axioms/sin-extended2.ax
 ----------------------------
-SZS status Theorem for /home/junaid/Research/git/sinepaper/smtFiles/newFiles/metit/approx_cos_ge_b1.tptp
-Processor time: 0.364 = 0.132 (Metis) + 0.232 (RCF)
-Maximum weight in proof search: 377
-0:00.42
+SZS status Theorem for /home/junaid/Research/git/sinepaper/smtFiles/updFiles/metit/approx_cos_ge_b1.tptp
+Processor time: 0.031 = 0.008 (Metis) + 0.023 (RCF)
+Maximum weight in proof search: 303
+0:00.05
 End:   approx_cos_ge_b1
 ----------==========----------
 ----------==========----------
@@ -248,13 +198,11 @@ Z3 version 4.3.1
 Generated Include List
 Axioms/general.ax
 Axioms/cos-extended2.ax
-Axioms/pi.ax
-Axioms/sin-extended2.ax
 ----------------------------
-SZS status Theorem for /home/junaid/Research/git/sinepaper/smtFiles/newFiles/metit/approx_cos_ge_b2.tptp
-Processor time: 0.367 = 0.133 (Metis) + 0.234 (RCF)
-Maximum weight in proof search: 377
-0:00.43
+SZS status Theorem for /home/junaid/Research/git/sinepaper/smtFiles/updFiles/metit/approx_cos_ge_b2.tptp
+Processor time: 0.031 = 0.010 (Metis) + 0.021 (RCF)
+Maximum weight in proof search: 303
+0:00.05
 End:   approx_cos_ge_b2
 ----------==========----------
 ----------==========----------
@@ -263,13 +211,11 @@ Z3 version 4.3.1
 Generated Include List
 Axioms/general.ax
 Axioms/cos-extended2.ax
-Axioms/pi.ax
-Axioms/sin-extended2.ax
 ----------------------------
-SZS status Theorem for /home/junaid/Research/git/sinepaper/smtFiles/newFiles/metit/approx_cos_ge_b3.tptp
-Processor time: 0.405 = 0.136 (Metis) + 0.268 (RCF)
-Maximum weight in proof search: 377
-0:00.46
+SZS status Theorem for /home/junaid/Research/git/sinepaper/smtFiles/updFiles/metit/approx_cos_ge_b3.tptp
+Processor time: 0.036 = 0.007 (Metis) + 0.029 (RCF)
+Maximum weight in proof search: 303
+0:00.06
 End:   approx_cos_ge_b3
 ----------==========----------
 ----------==========----------
@@ -278,13 +224,11 @@ Z3 version 4.3.1
 Generated Include List
 Axioms/general.ax
 Axioms/cos-extended2.ax
-Axioms/pi.ax
-Axioms/sin-extended2.ax
 ----------------------------
-SZS status Theorem for /home/junaid/Research/git/sinepaper/smtFiles/newFiles/metit/approx_cos_le.tptp
-Processor time: 0.334 = 0.103 (Metis) + 0.232 (RCF)
-Maximum weight in proof search: 369
-0:00.38
+SZS status Theorem for /home/junaid/Research/git/sinepaper/smtFiles/updFiles/metit/approx_cos_le.tptp
+Processor time: 0.020 = 0.005 (Metis) + 0.015 (RCF)
+Maximum weight in proof search: 300
+0:00.04
 End:   approx_cos_le
 ----------==========----------
 ----------==========----------
@@ -293,13 +237,11 @@ Z3 version 4.3.1
 Generated Include List
 Axioms/general.ax
 Axioms/cos-extended2.ax
-Axioms/pi.ax
-Axioms/sin-extended2.ax
 ----------------------------
-SZS status Theorem for /home/junaid/Research/git/sinepaper/smtFiles/newFiles/metit/approx_cos_le_b1.tptp
-Processor time: 0.347 = 0.112 (Metis) + 0.235 (RCF)
-Maximum weight in proof search: 369
-0:00.39
+SZS status Theorem for /home/junaid/Research/git/sinepaper/smtFiles/updFiles/metit/approx_cos_le_b1.tptp
+Processor time: 0.015 = 0.004 (Metis) + 0.011 (RCF)
+Maximum weight in proof search: 300
+0:00.04
 End:   approx_cos_le_b1
 ----------==========----------
 ----------==========----------
@@ -308,13 +250,11 @@ Z3 version 4.3.1
 Generated Include List
 Axioms/general.ax
 Axioms/cos-extended2.ax
-Axioms/pi.ax
-Axioms/sin-extended2.ax
 ----------------------------
-SZS status Theorem for /home/junaid/Research/git/sinepaper/smtFiles/newFiles/metit/approx_cos_le_b2.tptp
-Processor time: 0.330 = 0.110 (Metis) + 0.220 (RCF)
-Maximum weight in proof search: 369
-0:00.38
+SZS status Theorem for /home/junaid/Research/git/sinepaper/smtFiles/updFiles/metit/approx_cos_le_b2.tptp
+Processor time: 0.011 = 0.003 (Metis) + 0.007 (RCF)
+Maximum weight in proof search: 300
+0:00.04
 End:   approx_cos_le_b2
 ----------==========----------
 ----------==========----------
@@ -323,13 +263,11 @@ Z3 version 4.3.1
 Generated Include List
 Axioms/general.ax
 Axioms/cos-extended2.ax
-Axioms/pi.ax
-Axioms/sin-extended2.ax
 ----------------------------
-SZS status Theorem for /home/junaid/Research/git/sinepaper/smtFiles/newFiles/metit/approx_cos_le_b3.tptp
-Processor time: 0.297 = 0.079 (Metis) + 0.218 (RCF)
-Maximum weight in proof search: 369
-0:00.37
+SZS status Theorem for /home/junaid/Research/git/sinepaper/smtFiles/updFiles/metit/approx_cos_le_b3.tptp
+Processor time: 0.014 = 0.004 (Metis) + 0.009 (RCF)
+Maximum weight in proof search: 300
+0:00.04
 End:   approx_cos_le_b3
 ----------==========----------
 ----------==========----------
@@ -337,14 +275,12 @@ Start: taylor_sin
 Z3 version 4.3.1
 Generated Include List
 Axioms/general.ax
-Axioms/cos-extended2.ax
-Axioms/pi.ax
 Axioms/sin-extended2.ax
 ----------------------------
-SZS status Theorem for /home/junaid/Research/git/sinepaper/smtFiles/newFiles/metit/taylor_sin.tptp
-Processor time: 1.220 = 0.445 (Metis) + 0.775 (RCF)
-Maximum weight in proof search: 491
-0:01.42
+SZS status Theorem for /home/junaid/Research/git/sinepaper/smtFiles/updFiles/metit/taylor_sin.tptp
+Processor time: 0.082 = 0.033 (Metis) + 0.049 (RCF)
+Maximum weight in proof search: 382
+0:00.13
 End:   taylor_sin
 ----------==========----------
 ----------==========----------
@@ -352,103 +288,39 @@ Start: taylor_sin_double
 Z3 version 4.3.1
 Generated Include List
 Axioms/general.ax
-Axioms/cos-extended2.ax
-Axioms/pi.ax
 Axioms/sin-extended2.ax
 ----------------------------
-SZS status Theorem for /home/junaid/Research/git/sinepaper/smtFiles/newFiles/metit/taylor_sin_double.tptp
-Processor time: 1.157 = 0.444 (Metis) + 0.713 (RCF)
-Maximum weight in proof search: 491
-0:01.38
+SZS status Theorem for /home/junaid/Research/git/sinepaper/smtFiles/updFiles/metit/taylor_sin_double.tptp
+Processor time: 0.086 = 0.049 (Metis) + 0.037 (RCF)
+Maximum weight in proof search: 382
+0:00.12
 End:   taylor_sin_double
-----------==========----------
-----------==========----------
-Start: taylor_sin_p_x_ge
-Z3 version 4.3.1
-Generated Include List
-Axioms/general.ax
-Axioms/cos-extended2.ax
-Axioms/pi.ax
-Axioms/sin-extended2.ax
-----------------------------
-SZS status Theorem for /home/junaid/Research/git/sinepaper/smtFiles/newFiles/metit/taylor_sin_p_x_ge.tptp
-Processor time: 0.018 = 0.006 (Metis) + 0.012 (RCF)
-Maximum weight in proof search: 1
-0:00.06
-End:   taylor_sin_p_x_ge
-----------==========----------
-----------==========----------
-Start: taylor_sin_p_x_le
-Z3 version 4.3.1
-Generated Include List
-Axioms/general.ax
-Axioms/cos-extended2.ax
-Axioms/pi.ax
-Axioms/sin-extended2.ax
-----------------------------
-SZS status Theorem for /home/junaid/Research/git/sinepaper/smtFiles/newFiles/metit/taylor_sin_p_x_le.tptp
-Processor time: 0.015 = 0.005 (Metis) + 0.010 (RCF)
-Maximum weight in proof search: 1
-0:00.04
-End:   taylor_sin_p_x_le
 ----------==========----------
 ----------==========----------
 Start: taylor_sin_p
 Z3 version 4.3.1
 Generated Include List
 Axioms/general.ax
-Axioms/cos-extended2.ax
-Axioms/pi.ax
 Axioms/sin-extended2.ax
 ----------------------------
-SZS status Theorem for /home/junaid/Research/git/sinepaper/smtFiles/newFiles/metit/taylor_sin_p.tptp
-Processor time: 1.219 = 0.436 (Metis) + 0.784 (RCF)
-Maximum weight in proof search: 491
-0:01.44
+SZS status Theorem for /home/junaid/Research/git/sinepaper/smtFiles/updFiles/metit/taylor_sin_p.tptp
+Processor time: 0.088 = 0.040 (Metis) + 0.048 (RCF)
+Maximum weight in proof search: 382
+0:00.13
 End:   taylor_sin_p
-----------==========----------
-----------==========----------
-Start: sinsin_onesin_pre_ge
-Z3 version 4.3.1
-Generated Include List
-Axioms/general.ax
-Axioms/cos-extended2.ax
-Axioms/pi.ax
-Axioms/sin-extended2.ax
-----------------------------
-SZS status Theorem for /home/junaid/Research/git/sinepaper/smtFiles/newFiles/metit/sinsin_onesin_pre_ge.tptp
-Processor time: 0.011 = 0.003 (Metis) + 0.008 (RCF)
-Maximum weight in proof search: 0
-0:00.06
-End:   sinsin_onesin_pre_ge
-----------==========----------
-----------==========----------
-Start: sinsin_onesin_pre_le
-Z3 version 4.3.1
-Generated Include List
-Axioms/trans.ax
-Axioms/general.ax
-----------------------------
-SZS status Theorem for /home/junaid/Research/git/sinepaper/smtFiles/newFiles/metit/sinsin_onesin_pre_le.tptp
-Processor time: 0.000 = 0.000 (Metis) + 0.000 (RCF)
-Maximum weight in proof search: 0
-0:00.02
-End:   sinsin_onesin_pre_le
 ----------==========----------
 ----------==========----------
 Start: sinsin
 Z3 version 4.3.1
 Generated Include List
 Axioms/general.ax
-Axioms/cos-extended2.ax
-Axioms/pi.ax
 Axioms/sin-extended2.ax
 ----------------------------
-....SZS status GaveUp for /home/junaid/Research/git/sinepaper/smtFiles/newFiles/metit/sinsin.tptp
-Processor time: 54.794 = 49.320 (Metis) + 5.474 (RCF)
-Maximum weight in proof search: 1996
+SZS status GaveUp for /home/junaid/Research/git/sinepaper/smtFiles/updFiles/metit/sinsin.tptp
+Processor time: 1.445 = 0.919 (Metis) + 0.526 (RCF)
+Maximum weight in proof search: 1957
 Command exited with non-zero status 1
-0:54.44
+0:01.72
 End:   sinsin
 ----------==========----------
 ----------==========----------
@@ -456,15 +328,13 @@ Start: sinsin_b1
 Z3 version 4.3.1
 Generated Include List
 Axioms/general.ax
-Axioms/cos-extended2.ax
-Axioms/pi.ax
 Axioms/sin-extended2.ax
 ----------------------------
-....SZS status GaveUp for /home/junaid/Research/git/sinepaper/smtFiles/newFiles/metit/sinsin_b1.tptp
-Processor time: 54.780 = 49.294 (Metis) + 5.486 (RCF)
-Maximum weight in proof search: 1996
+SZS status GaveUp for /home/junaid/Research/git/sinepaper/smtFiles/updFiles/metit/sinsin_b1.tptp
+Processor time: 1.409 = 0.908 (Metis) + 0.501 (RCF)
+Maximum weight in proof search: 1957
 Command exited with non-zero status 1
-0:54.44
+0:01.70
 End:   sinsin_b1
 ----------==========----------
 ----------==========----------
@@ -472,15 +342,13 @@ Start: sinsin_b2
 Z3 version 4.3.1
 Generated Include List
 Axioms/general.ax
-Axioms/cos-extended2.ax
-Axioms/pi.ax
 Axioms/sin-extended2.ax
 ----------------------------
-....SZS status GaveUp for /home/junaid/Research/git/sinepaper/smtFiles/newFiles/metit/sinsin_b2.tptp
-Processor time: 54.655 = 49.173 (Metis) + 5.482 (RCF)
-Maximum weight in proof search: 1996
+SZS status GaveUp for /home/junaid/Research/git/sinepaper/smtFiles/updFiles/metit/sinsin_b2.tptp
+Processor time: 1.465 = 0.944 (Metis) + 0.520 (RCF)
+Maximum weight in proof search: 1957
 Command exited with non-zero status 1
-0:54.40
+0:01.74
 End:   sinsin_b2
 ----------==========----------
 ----------==========----------
@@ -488,15 +356,13 @@ Start: sinsin_b3
 Z3 version 4.3.1
 Generated Include List
 Axioms/general.ax
-Axioms/cos-extended2.ax
-Axioms/pi.ax
 Axioms/sin-extended2.ax
 ----------------------------
-....SZS status GaveUp for /home/junaid/Research/git/sinepaper/smtFiles/newFiles/metit/sinsin_b3.tptp
-Processor time: 54.594 = 49.136 (Metis) + 5.457 (RCF)
-Maximum weight in proof search: 1996
+SZS status GaveUp for /home/junaid/Research/git/sinepaper/smtFiles/updFiles/metit/sinsin_b3.tptp
+Processor time: 1.357 = 0.835 (Metis) + 0.522 (RCF)
+Maximum weight in proof search: 1957
 Command exited with non-zero status 1
-0:54.34
+0:01.73
 End:   sinsin_b3
 ----------==========----------
 ----------==========----------
@@ -507,8 +373,8 @@ Axioms/general.ax
 Axioms/sqrt-extended.ax
 Axioms/sqrt-general.ax
 ----------------------------
-SZS status Theorem for /home/junaid/Research/git/sinepaper/smtFiles/newFiles/metit/heron_init.tptp
-Processor time: 0.015 = 0.013 (Metis) + 0.003 (RCF)
+SZS status Theorem for /home/junaid/Research/git/sinepaper/smtFiles/updFiles/metit/heron_init.tptp
+Processor time: 0.016 = 0.009 (Metis) + 0.006 (RCF)
 Maximum weight in proof search: 317
 0:00.06
 End:   heron_init
@@ -521,8 +387,8 @@ Axioms/general.ax
 Axioms/sqrt-extended.ax
 Axioms/sqrt-general.ax
 ----------------------------
-SZS status GaveUp for /home/junaid/Research/git/sinepaper/smtFiles/newFiles/metit/heron_pres.tptp
-Processor time: 3.741 = 2.578 (Metis) + 1.163 (RCF)
+SZS status GaveUp for /home/junaid/Research/git/sinepaper/smtFiles/updFiles/metit/heron_pres.tptp
+Processor time: 3.733 = 2.575 (Metis) + 1.157 (RCF)
 Maximum weight in proof search: 1997
 Command exited with non-zero status 1
 0:04.27

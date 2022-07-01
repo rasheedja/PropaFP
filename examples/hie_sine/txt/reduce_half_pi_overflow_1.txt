@@ -1,5 +1,0 @@
-Bounds on variables: 
-
-exact NVC: 
-
-		False

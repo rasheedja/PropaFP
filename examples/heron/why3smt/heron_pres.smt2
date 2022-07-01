@@ -10,354 +10,536 @@
 (declare-sort string 0)
 
 (declare-datatypes ((tuple0 0))
-(((Tuple0))))
+  (((Tuple0))))
+
 (declare-sort us_private 0)
 
-(declare-fun private__bool_eq (us_private us_private) Bool)
+;; private__bool_eq
+(declare-fun private__bool_eq (us_private
+  us_private) Bool)
 
 (declare-const us_null_ext__ us_private)
 
 (declare-sort us_type_of_heap 0)
 
 (declare-datatypes ((us_type_of_heap__ref 0))
-(((us_type_of_heap__refqtmk (us_type_of_heap__content us_type_of_heap)))))
+  (((us_type_of_heap__refqtmk (us_type_of_heap__content us_type_of_heap)))))
+
 (declare-sort us_image 0)
 
 (declare-datatypes ((int__ref 0))
-(((int__refqtmk (int__content Int)))))
+  (((int__refqtmk (int__content Int)))))
+
 (declare-datatypes ((bool__ref 0))
-(((bool__refqtmk (bool__content Bool)))))
+  (((bool__refqtmk (bool__content Bool)))))
+
 (declare-datatypes ((us_fixed__ref 0))
-(((us_fixed__refqtmk (us_fixed__content Int)))))
+  (((us_fixed__refqtmk (us_fixed__content Int)))))
+
 (declare-datatypes ((real__ref 0))
-(((real__refqtmk (real__content Real)))))
+  (((real__refqtmk (real__content Real)))))
+
 (declare-datatypes ((us_private__ref 0))
-(((us_private__refqtmk (us_private__content us_private)))))
-(define-fun int__ref___projection ((a int__ref)) Int (int__content a))
+  (((us_private__refqtmk (us_private__content us_private)))))
 
-(define-fun us_fixed__ref___projection ((a us_fixed__ref)) Int (us_fixed__content
-                                                               a))
+;; int__ref___projection
+(define-fun int__ref___projection ((a int__ref)) Int
+  (int__content a))
 
-(define-fun bool__ref___projection ((a bool__ref)) Bool (bool__content a))
+;; __fixed__ref___projection
+(define-fun us_fixed__ref___projection ((a us_fixed__ref)) Int
+  (us_fixed__content a))
 
-(define-fun real__ref___projection ((a real__ref)) Real (real__content a))
+;; bool__ref___projection
+(define-fun bool__ref___projection ((a bool__ref)) Bool
+  (bool__content a))
 
-(define-fun us_private__ref___projection ((a us_private__ref)) us_private 
+;; real__ref___projection
+(define-fun real__ref___projection ((a real__ref)) Real
+  (real__content a))
+
+;; __private__ref___projection
+(define-fun us_private__ref___projection ((a us_private__ref)) us_private
   (us_private__content a))
 
+;; power
+(declare-fun power (Int
+  Int) Int)
+
+;; Power_0
+(assert (forall ((x Int)) (= (power x 0) 1)))
+
+;; Power_s
+(assert
+  (forall ((x Int) (n Int))
+    (=> (or (< 0 n) (= 0 n)) (= (power x (+ n 1)) (* x (power x n))))))
+
+;; Power_s_alt
+(assert
+  (forall ((x Int) (n Int))
+    (=> (< 0 n) (= (power x n) (* x (power x (+ n (- 1))))))))
+
+;; Power_1
+(assert (forall ((x Int)) (= (power x 1) x)))
+
+;; Power_sum
+(assert
+  (forall ((x Int) (n Int) (m Int))
+    (=>
+      (or (< 0 n) (= 0 n))
+      (=>
+        (or (< 0 m) (= 0 m))
+        (= (power x (+ n m)) (* (power x n) (power x m)))))))
+
+;; Power_mult
+(assert
+  (forall ((x Int) (n Int) (m Int))
+    (=>
+      (or (< 0 n) (= 0 n))
+      (=> (or (< 0 m) (= 0 m)) (= (power x (* n m)) (power (power x n) m))))))
+
+;; Power_comm1
+(assert
+  (forall ((x Int) (y Int))
+    (=>
+      (= (* x y) (* y x))
+      (forall ((n Int))
+        (=> (or (< 0 n) (= 0 n)) (= (* (power x n) y) (* y (power x n))))))))
+
+;; Power_comm2
+(assert
+  (forall ((x Int) (y Int))
+    (=>
+      (= (* x y) (* y x))
+      (forall ((n Int))
+        (=>
+          (or (< 0 n) (= 0 n))
+          (= (power (* x y) n) (* (power x n) (power y n))))))))
+
+;; Power_non_neg
+(assert
+  (forall ((x Int) (y Int))
+    (=>
+      (and (or (< 0 x) (= 0 x)) (or (< 0 y) (= 0 y)))
+      (or (< 0 (power x y)) (= 0 (power x y))))))
+
+;; Power_pos
+(assert
+  (forall ((x Int) (y Int))
+    (=> (and (< 0 x) (or (< 0 y) (= 0 y))) (< 0 (power x y)))))
+
+;; Power_monotonic
+(assert
+  (forall ((x Int) (n Int) (m Int))
+    (=>
+      (and (< 0 x) (and (or (< 0 n) (= 0 n)) (or (< n m) (= n m))))
+      (or (< (power x n) (power x m)) (= (power x n) (power x m))))))
+
+;; pow2
 (declare-fun pow2 (Int) Int)
 
-(declare-fun of_int (RoundingMode Int) Float32)
+;; of_int
+(declare-fun of_int (RoundingMode
+  Int) Float32)
 
-(declare-fun to_int1 (RoundingMode Float32) Int)
+;; to_int
+(declare-fun to_int1 (RoundingMode
+  Float32) Int)
 
 (declare-const max_int Int)
 
+;; sqrt
 (declare-fun sqrt1 (Real) Real)
 
 ;; Sqrt_positive
-  (assert
+(assert
   (forall ((x Real))
-  (=> (or (< 0.0 x) (= 0.0 x)) (or (< 0.0 (sqrt1 x)) (= 0.0 (sqrt1 x))))))
+    (=> (or (< 0.0 x) (= 0.0 x)) (or (< 0.0 (sqrt1 x)) (= 0.0 (sqrt1 x))))))
 
 ;; Sqrt_square
-  (assert
+(assert
   (forall ((x Real))
-  (=> (or (< 0.0 x) (= 0.0 x)) (= (* (sqrt1 x) (sqrt1 x)) x))))
+    (=> (or (< 0.0 x) (= 0.0 x)) (= (* (sqrt1 x) (sqrt1 x)) x))))
 
 ;; Square_sqrt
-  (assert
+(assert
   (forall ((x Real)) (=> (or (< 0.0 x) (= 0.0 x)) (= (sqrt1 (* x x)) x))))
 
 ;; Sqrt_mul
-  (assert
+(assert
   (forall ((x Real) (y Real))
-  (=> (and (or (< 0.0 x) (= 0.0 x)) (or (< 0.0 y) (= 0.0 y)))
-  (= (sqrt1 (* x y)) (* (sqrt1 x) (sqrt1 y))))))
+    (=>
+      (and (or (< 0.0 x) (= 0.0 x)) (or (< 0.0 y) (= 0.0 y)))
+      (= (sqrt1 (* x y)) (* (sqrt1 x) (sqrt1 y))))))
 
 ;; Sqrt_le
-  (assert
+(assert
   (forall ((x Real) (y Real))
-  (=> (and (or (< 0.0 x) (= 0.0 x)) (or (< x y) (= x y)))
-  (or (< (sqrt1 x) (sqrt1 y)) (= (sqrt1 x) (sqrt1 y))))))
+    (=>
+      (and (or (< 0.0 x) (= 0.0 x)) (or (< x y) (= x y)))
+      (or (< (sqrt1 x) (sqrt1 y)) (= (sqrt1 x) (sqrt1 y))))))
 
-(declare-fun rem1 (Float32 Float32) Float32)
+;; rem
+(declare-fun rem1 (Float32
+  Float32) Float32)
 
 ;; one_is_int
-  (assert (fp.isIntegral32 (fp #b0 #b01111111 #b00000000000000000000000)))
+(assert (fp.isIntegral32 (fp #b0 #b01111111 #b00000000000000000000000)))
 
 ;; one_of_int
-  (assert (= (fp #b0 #b01111111 #b00000000000000000000000) (of_int RNA 1)))
+(assert (= (fp #b0 #b01111111 #b00000000000000000000000) (of_int RNA 1)))
 
 (declare-datatypes ((t__ref 0))
-(((t__refqtmk (t__content Float32)))))
+  (((t__refqtmk (t__content Float32)))))
+
+;; attr__ATTRIBUTE_IMAGE
 (declare-fun attr__ATTRIBUTE_IMAGE (Bool) us_image)
 
+;; attr__ATTRIBUTE_VALUE__pre_check
 (declare-fun attr__ATTRIBUTE_VALUE__pre_check (us_image) Bool)
 
+;; attr__ATTRIBUTE_VALUE
 (declare-fun attr__ATTRIBUTE_VALUE (us_image) Bool)
+
+;; bool_eq
+(declare-fun bool_eq (Real
+  Real) Bool)
+
+;; bool_ne
+(declare-fun bool_ne (Real
+  Real) Bool)
+
+;; bool_lt
+(declare-fun bool_lt (Real
+  Real) Bool)
+
+;; bool_le
+(declare-fun bool_le (Real
+  Real) Bool)
+
+;; bool_gt
+(declare-fun bool_gt (Real
+  Real) Bool)
+
+;; bool_ge
+(declare-fun bool_ge (Real
+  Real) Bool)
+
+;; bool_eq_axiom
+(assert
+  (forall ((x Real)) (forall ((y Real)) (= (= (bool_eq x y) true) (= x y)))))
+
+;; bool_ne_axiom
+(assert
+  (forall ((x Real))
+    (forall ((y Real)) (= (= (bool_ne x y) true) (not (= x y))))))
+
+;; bool_lt_axiom
+(assert
+  (forall ((x Real)) (forall ((y Real)) (= (= (bool_lt x y) true) (< x y)))))
+
+;; bool_int__le_axiom
+(assert
+  (forall ((x Real))
+    (forall ((y Real)) (= (= (bool_le x y) true) (or (< x y) (= x y))))))
+
+;; bool_gt_axiom
+(assert
+  (forall ((x Real)) (forall ((y Real)) (= (= (bool_gt x y) true) (< y x)))))
+
+;; bool_ge_axiom
+(assert
+  (forall ((x Real))
+    (forall ((y Real)) (= (= (bool_ge x y) true) (or (< y x) (= y x))))))
 
 (declare-sort integer 0)
 
+;; integer'int
 (declare-fun integerqtint (integer) Int)
 
+;; attr__ATTRIBUTE_IMAGE
 (declare-fun attr__ATTRIBUTE_IMAGE1 (Int) us_image)
 
+;; attr__ATTRIBUTE_VALUE__pre_check
 (declare-fun attr__ATTRIBUTE_VALUE__pre_check1 (us_image) Bool)
 
+;; attr__ATTRIBUTE_VALUE
 (declare-fun attr__ATTRIBUTE_VALUE1 (us_image) Int)
 
-(declare-fun user_eq (integer integer) Bool)
+;; user_eq
+(declare-fun user_eq (integer
+  integer) Bool)
 
 (declare-const dummy integer)
 
 (declare-datatypes ((integer__ref 0))
-(((integer__refqtmk (integer__content integer)))))
-(define-fun integer__ref_integer__content__projection ((a integer__ref)) integer 
+  (((integer__refqtmk (integer__content integer)))))
+
+;; integer__ref_integer__content__projection
+(define-fun integer__ref_integer__content__projection ((a integer__ref)) integer
   (integer__content a))
+
+(declare-sort natural 0)
+
+;; natural'int
+(declare-fun naturalqtint (natural) Int)
+
+;; attr__ATTRIBUTE_IMAGE
+(declare-fun attr__ATTRIBUTE_IMAGE2 (Int) us_image)
+
+;; attr__ATTRIBUTE_VALUE__pre_check
+(declare-fun attr__ATTRIBUTE_VALUE__pre_check2 (us_image) Bool)
+
+;; attr__ATTRIBUTE_VALUE
+(declare-fun attr__ATTRIBUTE_VALUE2 (us_image) Int)
+
+;; user_eq
+(declare-fun user_eq1 (natural
+  natural) Bool)
+
+(declare-const dummy1 natural)
+
+(declare-datatypes ((natural__ref 0))
+  (((natural__refqtmk (natural__content natural)))))
+
+;; natural__ref_natural__content__projection
+(define-fun natural__ref_natural__content__projection ((a natural__ref)) natural
+  (natural__content a))
 
 (declare-sort float__ 0)
 
-(declare-fun user_eq1 (float__ float__) Bool)
+;; user_eq
+(declare-fun user_eq2 (float__
+  float__) Bool)
 
-(declare-fun attr__ATTRIBUTE_IMAGE2 (Float32) us_image)
+;; attr__ATTRIBUTE_IMAGE
+(declare-fun attr__ATTRIBUTE_IMAGE3 (Float32) us_image)
 
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check2 (us_image) Bool)
+;; attr__ATTRIBUTE_VALUE__pre_check
+(declare-fun attr__ATTRIBUTE_VALUE__pre_check3 (us_image) Bool)
 
-(declare-fun attr__ATTRIBUTE_VALUE2 (us_image) Float32)
+;; attr__ATTRIBUTE_VALUE
+(declare-fun attr__ATTRIBUTE_VALUE3 (us_image) Float32)
 
-(declare-const dummy1 float__)
+(declare-const dummy2 float__)
 
 (declare-datatypes ((float____ref 0))
-(((float____refqtmk (float____content float__)))))
-(define-fun float____ref_float____content__projection ((a float____ref)) float__ 
+  (((float____refqtmk (float____content float__)))))
+
+;; float____ref_float____content__projection
+(define-fun float____ref_float____content__projection ((a float____ref)) float__
   (float____content a))
 
 (declare-const x Float32)
 
-(declare-const attr__ATTRIBUTE_ADDRESS Int)
-
 (declare-const n Int)
 
-(declare-const attr__ATTRIBUTE_ADDRESS1 Int)
-
-(declare-const attr__ATTRIBUTE_ADDRESS2 Int)
-
-(declare-const attr__ATTRIBUTE_ADDRESS3 Int)
-
-(declare-fun user_eq2 (Real Real) Bool)
+;; bool_eq
+(declare-fun bool_eq1 (Real
+  Real) Bool)
 
 (declare-const value__size Int)
 
-(declare-fun object__size (Real) Int)
+(declare-const object__size Int)
+
+(declare-const alignment Int)
 
 ;; value__size_axiom
-  (assert (or (< 0 value__size) (= 0 value__size)))
+(assert (or (< 0 value__size) (= 0 value__size)))
 
 ;; object__size_axiom
-  (assert
-  (forall ((a Real)) (or (< 0 (object__size a)) (= 0 (object__size a)))))
+(assert (or (< 0 object__size) (= 0 object__size)))
 
-(declare-fun exp1 (Real) Real)
+;; alignment_axiom
+(assert (or (< 0 alignment) (= 0 alignment)))
 
-;; Exp_zero
-  (assert (= (exp1 0.0) 1.0))
+;; user_eq
+(declare-fun user_eq3 (Real
+  Real) Bool)
 
-;; Exp_sum
-  (assert
-  (forall ((x1 Real) (y Real)) (= (exp1 (+ x1 y)) (* (exp1 x1) (exp1 y)))))
+(declare-const dummy3 Real)
 
-(declare-fun log (Real) Real)
+(declare-datatypes ((big_real__ref 0))
+  (((big_real__refqtmk (big_real__content Real)))))
 
-;; Log_one
-  (assert (= (log 1.0) 0.0))
+;; big_real__ref_big_real__content__projection
+(define-fun big_real__ref_big_real__content__projection ((a big_real__ref)) Real
+  (big_real__content a))
 
-;; Log_mul
-  (assert
-  (forall ((x1 Real) (y Real))
-  (=> (and (< 0.0 x1) (< 0.0 y)) (= (log (* x1 y)) (+ (log x1) (log y))))))
+(declare-datatypes ((valid_big_real__ref 0))
+  (((valid_big_real__refqtmk (valid_big_real__content Real)))))
 
-;; Log_exp
-  (assert (forall ((x1 Real)) (= (log (exp1 x1)) x1)))
+;; valid_big_real__ref_valid_big_real__content__projection
+(define-fun valid_big_real__ref_valid_big_real__content__projection ((a valid_big_real__ref)) Real
+  (valid_big_real__content a))
 
-;; Exp_log
-  (assert (forall ((x1 Real)) (=> (< 0.0 x1) (= (exp1 (log x1)) x1))))
+;; to_real
+(declare-fun to_real1 (Int) Real)
 
-(declare-fun pow (Real Real) Real)
+;; to_real__function_guard
+(declare-fun to_real__function_guard (Real
+  Int) Bool)
 
-;; Pow_def
-  (assert
-  (forall ((x1 Real) (y Real))
-  (=> (< 0.0 x1) (= (pow x1 y) (exp1 (* y (log x1)))))))
+;; bool_eq
+(declare-fun bool_eq2 (Int
+  Int) Bool)
 
-;; Pow_pos
-  (assert (forall ((x1 Real) (y Real)) (=> (< 0.0 x1) (< 0.0 (pow x1 y)))))
+(declare-const value__size1 Int)
 
-;; Pow_plus
-  (assert
-  (forall ((x1 Real) (y Real) (z Real))
-  (=> (< 0.0 z) (= (pow z (+ x1 y)) (* (pow z x1) (pow z y))))))
+(declare-const object__size1 Int)
 
-;; Pow_mult
-  (assert
-  (forall ((x1 Real) (y Real) (z Real))
-  (=> (< 0.0 x1) (= (pow (pow x1 y) z) (pow x1 (* y z))))))
+(declare-const alignment1 Int)
 
-;; Pow_x_zero
-  (assert (forall ((x1 Real)) (=> (< 0.0 x1) (= (pow x1 0.0) 1.0))))
+;; value__size_axiom
+(assert (or (< 0 value__size1) (= 0 value__size1)))
 
-;; Pow_x_one
-  (assert (forall ((x1 Real)) (=> (< 0.0 x1) (= (pow x1 1.0) x1))))
+;; object__size_axiom
+(assert (or (< 0 object__size1) (= 0 object__size1)))
 
-;; Pow_one_y
-  (assert (forall ((y Real)) (= (pow 1.0 y) 1.0)))
+;; alignment_axiom
+(assert (or (< 0 alignment1) (= 0 alignment1)))
 
-;; Pow_x_two
-  (assert (forall ((x1 Real)) (=> (< 0.0 x1) (= (pow x1 2.0) (* x1 x1)))))
+;; user_eq
+(declare-fun user_eq4 (Int
+  Int) Bool)
 
-;; Pow_half
-  (assert
-  (forall ((x1 Real)) (=> (< 0.0 x1) (= (pow x1 (/ 5.0 10.0)) (sqrt1 x1)))))
+(declare-const dummy4 Int)
 
-(declare-fun power (Int Int) Int)
+(declare-datatypes ((big_integer__ref 0))
+  (((big_integer__refqtmk (big_integer__content Int)))))
 
-;; Power_0
-  (assert (forall ((x1 Int)) (= (power x1 0) 1)))
+;; big_integer__ref_big_integer__content__projection
+(define-fun big_integer__ref_big_integer__content__projection ((a big_integer__ref)) Int
+  (big_integer__content a))
 
-;; Power_s
-  (assert
-  (forall ((x1 Int) (n1 Int))
-  (=> (or (< 0 n1) (= 0 n1)) (= (power x1 (+ n1 1)) (* x1 (power x1 n1))))))
+(declare-datatypes ((valid_big_integer__ref 0))
+  (((valid_big_integer__refqtmk (valid_big_integer__content Int)))))
 
-;; Power_s_alt
-  (assert
-  (forall ((x1 Int) (n1 Int))
-  (=> (< 0 n1) (= (power x1 n1) (* x1 (power x1 (+ n1 (- 1))))))))
+;; valid_big_integer__ref_valid_big_integer__content__projection
+(define-fun valid_big_integer__ref_valid_big_integer__content__projection 
+  ((a valid_big_integer__ref)) Int
+  (valid_big_integer__content a))
 
-;; Power_1
-  (assert (forall ((x1 Int)) (= (power x1 1) x1)))
+;; to_real__post_axiom
+(assert true)
 
-;; Power_sum
-  (assert
-  (forall ((x1 Int) (n1 Int) (m Int))
-  (=> (or (< 0 n1) (= 0 n1))
-  (=> (or (< 0 m) (= 0 m))
-  (= (power x1 (+ n1 m)) (* (power x1 n1) (power x1 m)))))))
+;; to_real__def_axiom
+(assert
+  (forall ((arg Int))
+    (! (=>
+         (and
+           (or (< (- 2147483648) arg) (= (- 2147483648) arg))
+           (or (< arg 2147483647) (= arg 2147483647)))
+         (= (to_real1 arg) (* (to_real arg) (/ 1.0 (to_real 1))))) :pattern (
+    (to_real1
+      arg)) )))
 
-;; Power_mult
-  (assert
-  (forall ((x1 Int) (n1 Int) (m Int))
-  (=> (or (< 0 n1) (= 0 n1))
-  (=> (or (< 0 m) (= 0 m)) (= (power x1 (* n1 m)) (power (power x1 n1) m))))))
+;; real_square_root
+(declare-fun real_square_root (Real) Real)
 
-;; Power_comm1
-  (assert
-  (forall ((x1 Int) (y Int))
-  (=> (= (* x1 y) (* y x1))
-  (forall ((n1 Int))
-  (=> (or (< 0 n1) (= 0 n1)) (= (* (power x1 n1) y) (* y (power x1 n1))))))))
+;; real_square_root__function_guard
+(declare-fun real_square_root__function_guard (Real
+  Real) Bool)
 
-;; Power_comm2
-  (assert
-  (forall ((x1 Int) (y Int))
-  (=> (= (* x1 y) (* y x1))
-  (forall ((n1 Int))
-  (=> (or (< 0 n1) (= 0 n1))
-  (= (power (* x1 y) n1) (* (power x1 n1) (power y n1))))))))
+;; real_square_root__post_axiom
+(assert
+  (forall ((a Real))
+    (! (=>
+         (= (bool_ge a (to_real1 0)) true)
+         (=>
+           (real_square_root__function_guard (real_square_root a) a)
+           (and
+             (= (bool_ge (real_square_root a) (to_real1 0)) true)
+             (= (bool_eq (* (real_square_root a) (real_square_root a)) a) true)))) :pattern (
+    (real_square_root
+      a)) )))
 
-;; Power_non_neg
-  (assert
-  (forall ((x1 Int) (y Int))
-  (=> (and (or (< 0 x1) (= 0 x1)) (or (< 0 y) (= 0 y)))
-  (or (< 0 (power x1 y)) (= 0 (power x1 y))))))
+;; to_rep
+(define-fun to_rep ((x1 integer)) Int
+  (integerqtint x1))
 
-;; Power_pos
-  (assert
-  (forall ((x1 Int) (y Int))
-  (=> (and (< 0 x1) (or (< 0 y) (= 0 y))) (< 0 (power x1 y)))))
-
-;; Power_monotonic
-  (assert
-  (forall ((x1 Int) (n1 Int) (m Int))
-  (=> (and (< 0 x1) (and (or (< 0 n1) (= 0 n1)) (or (< n1 m) (= n1 m))))
-  (or (< (power x1 n1) (power x1 m)) (= (power x1 n1) (power x1 m))))))
-
-;; pow_from_int
-  (assert
-  (forall ((x1 Int) (y Int))
-  (=> (< 0 x1)
-  (=> (or (< 0 y) (= 0 y))
-  (= (pow (to_real x1) (to_real y)) (to_real (power x1 y)))))))
-
-(define-fun to_rep ((x1 integer)) Int (integerqtint x1))
-
+;; of_rep
 (declare-fun of_rep (Int) integer)
 
 ;; inversion_axiom
-  (assert
+(assert
   (forall ((x1 integer))
-  (! (= (of_rep (to_rep x1)) x1) :pattern ((to_rep x1)) )))
+    (! (= (of_rep (to_rep x1)) x1) :pattern ((to_rep x1)) )))
 
 ;; range_axiom
-  (assert
+(assert
   (forall ((x1 integer))
-  (! (and (or (< (- 2147483648) (to_rep x1)) (= (- 2147483648) (to_rep x1)))
-     (or (< (to_rep x1) 2147483647) (= (to_rep x1) 2147483647))) :pattern (
-  (to_rep x1)) )))
+    (! (and
+         (or (< (- 2147483648) (to_rep x1)) (= (- 2147483648) (to_rep x1)))
+         (or (< (to_rep x1) 2147483647) (= (to_rep x1) 2147483647))) :pattern (
+    (to_rep
+      x1)) )))
 
 ;; coerce_axiom
-  (assert
+(assert
   (forall ((x1 Int))
-  (! (=>
-     (and (or (< (- 2147483648) x1) (= (- 2147483648) x1))
-     (or (< x1 2147483647) (= x1 2147483647))) (= (to_rep (of_rep x1)) x1)) :pattern (
-  (to_rep (of_rep x1))) )))
+    (! (=>
+         (and
+           (or (< (- 2147483648) x1) (= (- 2147483648) x1))
+           (or (< x1 2147483647) (= x1 2147483647)))
+         (= (to_rep (of_rep x1)) x1)) :pattern ((to_rep (of_rep x1))) )))
 
-(declare-fun attr__ATTRIBUTE_IMAGE3 (Int) us_image)
+;; attr__ATTRIBUTE_IMAGE
+(declare-fun attr__ATTRIBUTE_IMAGE4 (Int) us_image)
 
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check3 (us_image) Bool)
+;; attr__ATTRIBUTE_VALUE__pre_check
+(declare-fun attr__ATTRIBUTE_VALUE__pre_check4 (us_image) Bool)
 
-(declare-fun attr__ATTRIBUTE_VALUE3 (us_image) Int)
+;; attr__ATTRIBUTE_VALUE
+(declare-fun attr__ATTRIBUTE_VALUE4 (us_image) Int)
 
-(declare-fun user_eq3 (integer integer) Bool)
+;; user_eq
+(declare-fun user_eq5 (integer
+  integer) Bool)
 
-(declare-const dummy2 integer)
+(declare-const dummy5 integer)
 
 (declare-datatypes ((t1b__ref 0))
-(((t1b__refqtmk (t1b__content integer)))))
-(define-fun t1b__ref_t1b__content__projection ((a t1b__ref)) integer 
+  (((t1b__refqtmk (t1b__content integer)))))
+
+;; t1b__ref_t1b__content__projection
+(define-fun t1b__ref_t1b__content__projection ((a t1b__ref)) integer
   (t1b__content a))
 
 ;; Assume
-  (assert (fp.isFinite32 x))
+(assert (fp.isFinite32 x))
 
 ;; Assume
-  (assert
-  (and (or (< (- 2147483648) n) (= (- 2147483648) n))
-  (or (< n 2147483647) (= n 2147483647))))
-
-;; Assume
-  (assert
+(assert
   (and
-  (and
-  (and (fp.leq (fp #b0 #b01111110 #b00000000000000000000000) x)
-  (fp.leq x (fp #b0 #b10000000 #b00000000000000000000000)))
-  (or (< 1 n) (= 1 n))) (or (< n 5) (= n 5))))
+    (or (< (- 2147483648) n) (= (- 2147483648) n))
+    (or (< n 2147483647) (= n 2147483647))))
 
 ;; Assume
-  (assert (fp.isFinite32 (fp #b0 #b01111111 #b00000000000000000000000)))
+(assert
+  (and
+    (and
+      (and
+        (fp.leq (fp #b0 #b01111110 #b00000000000000000000000) x)
+        (fp.leq x (fp #b0 #b10000000 #b00000000000000000000000)))
+      (or (< 1 n) (= 1 n)))
+    (or (< n 5) (= n 5))))
+
+;; Assume
+(assert (fp.isFinite32 (fp #b0 #b01111111 #b00000000000000000000000)))
 
 ;; H
-  (assert
-  (= (ite (= (ite true true false) true) (ite (or (< 1 n) (= 1 n)) true
-                                         false) false) true))
+(assert
+  (= (ite (= (ite true true false) true) (ite (or (< 1 n) (= 1 n))
+                                           true
+                                           false) false) true))
 
 ;; Ensures
-  (assert
+(assert
   (fp.isFinite32 (fp.div RNE x (fp #b0 #b01111111 #b00000000000000000000000))))
 
 ;; Ensures
-  (assert
+(assert
   (fp.isFinite32 (fp.add RNE (fp #b0 #b01111111 #b00000000000000000000000) (fp.div RNE 
   x (fp #b0 #b01111111 #b00000000000000000000000)))))
 
@@ -366,82 +548,106 @@
 (declare-const i Int)
 
 ;; LoopInvariant
-  (assert (fp.leq (fp #b0 #b01111110 #b01100110011001100110011) y))
+(assert (fp.leq (fp #b0 #b01111110 #b01100110011001100110011) y))
 
 ;; LoopInvariant
-  (assert (fp.leq y (fp #b0 #b01111111 #b11001100110011001100110)))
+(assert (fp.leq y (fp #b0 #b01111111 #b11001100110011001100110)))
 
 ;; LoopInvariant
-  (assert
-  (= (ite (or
-          (< (ite (or (< 0.0 (+ (sqrt1 (fp.to_real x)) (- (fp.to_real 
-                  y))))
-                  (= 0.0 (+ (sqrt1 (fp.to_real x)) (- (fp.to_real y)))))
-             (+ (sqrt1 (fp.to_real x)) (- (fp.to_real y)))
-             (- (+ (sqrt1 (fp.to_real x)) (- (fp.to_real y))))) (+ (* (to_real 1) (/ 1.0 
-          (pow (to_real 2) (pow (to_real 2) (to_real i))))) (* (to_real (* 3 
-          i)) (* (to_real 1) (/ 1.0 (to_real 8388608))))))
-          (= (ite (or (< 0.0 (+ (sqrt1 (fp.to_real x)) (- (fp.to_real 
-                  y))))
-                  (= 0.0 (+ (sqrt1 (fp.to_real x)) (- (fp.to_real y)))))
-             (+ (sqrt1 (fp.to_real x)) (- (fp.to_real y)))
-             (- (+ (sqrt1 (fp.to_real x)) (- (fp.to_real y))))) (+ (* (to_real 1) (/ 1.0 
-          (pow (to_real 2) (pow (to_real 2) (to_real i))))) (* (to_real (* 3 
-          i)) (* (to_real 1) (/ 1.0 (to_real 8388608)))))))
-     true false) true))
+(assert
+  (and
+    (real_square_root__function_guard
+      (real_square_root (fp.to_real x))
+      (fp.to_real x))
+    (and
+      (real_square_root__function_guard
+        (real_square_root (fp.to_real x))
+        (fp.to_real x))
+      (and
+        (real_square_root__function_guard
+          (real_square_root (fp.to_real x))
+          (fp.to_real x))
+        (and
+          (real_square_root__function_guard
+            (real_square_root (fp.to_real x))
+            (fp.to_real x))
+          (= (bool_le
+               (ite (or
+                      (< 0.0 (+ (real_square_root (fp.to_real x)) (- (fp.to_real 
+                      y))))
+                      (= 0.0 (+ (real_square_root (fp.to_real x)) (- (fp.to_real 
+                      y)))))
+                 (+ (real_square_root (fp.to_real x)) (- (fp.to_real 
+                 y)))
+                 (- (+ (real_square_root (fp.to_real x)) (- (fp.to_real 
+                 y)))))
+               (+ (* (to_real1 1) (/ 1.0 (to_real1 (power 2 (power 2 i))))) (* 
+               (to_real1
+                 (* 3 i)) (* (to_real1 1) (/ 1.0 (to_real1 8388608)))))) true))))))
 
 ;; H
-  (assert
-  (= (ite (= (ite (and (fp.isFinite32 y)
-                  (and (or (< 1 i) (= 1 i)) (or (< i n) (= i n))))
-             true false) true) (ite (and (or (< 1 i) (= 1 i))
-                                    (or (< i n) (= i n)))
-                               true false) false) true))
+(assert
+  (= (ite (= (ite (and
+                    (and (or (< 1 i) (= 1 i)) (or (< i n) (= i n)))
+                    (fp.isFinite32 y))
+               true
+               false) true) (ite (and
+                                   (or (< 1 i) (= 1 i))
+                                   (or (< i n) (= i n)))
+                              true
+                              false) false) true))
 
 ;; H
-  (assert (not (= i n)))
+(assert (not (= i n)))
 
 ;; Ensures
-  (assert (fp.isFinite32 (fp.div RNE x y)))
+(assert (fp.isFinite32 (fp.div RNE x y)))
 
 ;; Ensures
-  (assert (fp.isFinite32 (fp.add RNE y (fp.div RNE x y))))
+(assert (fp.isFinite32 (fp.add RNE y (fp.div RNE x y))))
 
 ;; LoopInvariant
-  (assert
+(assert
   (fp.leq (fp #b0 #b01111110 #b01100110011001100110011) (fp.div RNE (fp.add RNE 
   y (fp.div RNE x y)) (fp #b0 #b10000000 #b00000000000000000000000))))
 
 ;; LoopInvariant
-  (assert
+(assert
   (fp.leq (fp.div RNE (fp.add RNE y (fp.div RNE x y)) (fp #b0 #b10000000 #b00000000000000000000000)) (fp #b0 #b01111111 #b11001100110011001100110)))
 
+;; Goal def'vc
+;; File "heron.ads", line 11, characters 0-0
 (assert
-;; defqtvc
- ;; File "certified_heron.ads", line 7, characters 0-0
   (not
-  (= (ite (or
-          (< (ite (or
-                  (< 0.0 (+ (sqrt1 (fp.to_real x)) (- (fp.to_real (fp.div RNE (fp.add RNE 
-                  y (fp.div RNE x y)) (fp #b0 #b10000000 #b00000000000000000000000))))))
-                  (= 0.0 (+ (sqrt1 (fp.to_real x)) (- (fp.to_real (fp.div RNE (fp.add RNE 
-                  y (fp.div RNE x y)) (fp #b0 #b10000000 #b00000000000000000000000)))))))
-             (+ (sqrt1 (fp.to_real x)) (- (fp.to_real (fp.div RNE (fp.add RNE 
-             y (fp.div RNE x y)) (fp #b0 #b10000000 #b00000000000000000000000)))))
-             (- (+ (sqrt1 (fp.to_real x)) (- (fp.to_real (fp.div RNE (fp.add RNE 
-             y (fp.div RNE x y)) (fp #b0 #b10000000 #b00000000000000000000000))))))) (+ (* (to_real 1) (/ 1.0 
-          (pow (to_real 2) (pow (to_real 2) (to_real (+ i 1)))))) (* (to_real (* 3 (+ 
-          i 1))) (* (to_real 1) (/ 1.0 (to_real 8388608))))))
-          (= (ite (or
-                  (< 0.0 (+ (sqrt1 (fp.to_real x)) (- (fp.to_real (fp.div RNE (fp.add RNE 
-                  y (fp.div RNE x y)) (fp #b0 #b10000000 #b00000000000000000000000))))))
-                  (= 0.0 (+ (sqrt1 (fp.to_real x)) (- (fp.to_real (fp.div RNE (fp.add RNE 
-                  y (fp.div RNE x y)) (fp #b0 #b10000000 #b00000000000000000000000)))))))
-             (+ (sqrt1 (fp.to_real x)) (- (fp.to_real (fp.div RNE (fp.add RNE 
-             y (fp.div RNE x y)) (fp #b0 #b10000000 #b00000000000000000000000)))))
-             (- (+ (sqrt1 (fp.to_real x)) (- (fp.to_real (fp.div RNE (fp.add RNE 
-             y (fp.div RNE x y)) (fp #b0 #b10000000 #b00000000000000000000000))))))) (+ (* (to_real 1) (/ 1.0 
-          (pow (to_real 2) (pow (to_real 2) (to_real (+ i 1)))))) (* (to_real (* 3 (+ 
-          i 1))) (* (to_real 1) (/ 1.0 (to_real 8388608)))))))
-     true false) true)))
+  (=>
+    (real_square_root__function_guard
+      (real_square_root (fp.to_real x))
+      (fp.to_real x))
+    (=>
+      (real_square_root__function_guard
+        (real_square_root (fp.to_real x))
+        (fp.to_real x))
+      (=>
+        (real_square_root__function_guard
+          (real_square_root (fp.to_real x))
+          (fp.to_real x))
+        (=>
+          (real_square_root__function_guard
+            (real_square_root (fp.to_real x))
+            (fp.to_real x))
+          (= (bool_le
+               (ite (or
+                      (< 0.0 (+ (real_square_root (fp.to_real x)) (- (fp.to_real (fp.div RNE (fp.add RNE 
+                      y (fp.div RNE x y)) (fp #b0 #b10000000 #b00000000000000000000000))))))
+                      (= 0.0 (+ (real_square_root (fp.to_real x)) (- (fp.to_real (fp.div RNE (fp.add RNE 
+                      y (fp.div RNE x y)) (fp #b0 #b10000000 #b00000000000000000000000)))))))
+                 (+ (real_square_root (fp.to_real x)) (- (fp.to_real (fp.div RNE (fp.add RNE 
+                 y (fp.div RNE x y)) (fp #b0 #b10000000 #b00000000000000000000000)))))
+                 (- (+ (real_square_root (fp.to_real x)) (- (fp.to_real (fp.div RNE (fp.add RNE 
+                 y (fp.div RNE x y)) (fp #b0 #b10000000 #b00000000000000000000000)))))))
+               (+ (* (to_real1 1) (/ 1.0 (to_real1
+                                           (power 2 (power 2 (+ i 1)))))) (* 
+               (to_real1
+                 (* 3 (+ i 1))) (* (to_real1 1) (/ 1.0 (to_real1 8388608)))))) true)))))))
+
 (check-sat)

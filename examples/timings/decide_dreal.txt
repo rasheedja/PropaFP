@@ -2,7 +2,7 @@ Start: my_machine_rounding_ge
 terminate called after throwing an instance of 'std::runtime_error'
   what():  No function definition for to_int_rna.
 Command terminated by signal 6
-0:01.11
+0:01.15
 End:   my_machine_rounding_ge
 Start: my_machine_rounding_le
 terminate called after throwing an instance of 'std::runtime_error'
@@ -10,18 +10,8 @@ terminate called after throwing an instance of 'std::runtime_error'
 Command terminated by signal 6
 0:01.10
 End:   my_machine_rounding_le
-Start: reduce_half_pi_overflow_1
-unsat
-(error "model is not available")
-0:00.00
-End:   reduce_half_pi_overflow_1
-Start: reduce_half_pi_overflow_2
-unsat
-(error "model is not available")
-0:00.00
-End:   reduce_half_pi_overflow_2
 Start: reduce_half_pi_x_ge
-At line 35 the following value would fall out of the range of the result type (long):
+At line 11 the following value would fall out of the range of the result type (long):
 2500000000000000000000000
 terminate called after throwing an instance of 'std::out_of_range'
   what():  stol
@@ -29,7 +19,7 @@ Command terminated by signal 6
 0:01.10
 End:   reduce_half_pi_x_ge
 Start: reduce_half_pi_x_le
-At line 35 the following value would fall out of the range of the result type (long):
+At line 11 the following value would fall out of the range of the result type (long):
 2500000000000000000000000
 terminate called after throwing an instance of 'std::out_of_range'
   what():  stol
@@ -37,7 +27,7 @@ Command terminated by signal 6
 0:01.10
 End:   reduce_half_pi_x_le
 Start: reduce_half_pi_ge
-At line 35 the following value would fall out of the range of the result type (long):
+At line 11 the following value would fall out of the range of the result type (long):
 2500000000000000000000000
 terminate called after throwing an instance of 'std::out_of_range'
   what():  stol
@@ -45,67 +35,67 @@ Command terminated by signal 6
 0:01.10
 End:   reduce_half_pi_ge
 Start: reduce_half_pi_le
-At line 35 the following value would fall out of the range of the result type (long):
+At line 11 the following value would fall out of the range of the result type (long):
 2500000000000000000000000
 terminate called after throwing an instance of 'std::out_of_range'
   what():  stol
 Command terminated by signal 6
-0:01.10
+0:01.09
 End:   reduce_half_pi_le
 Start: approx_sin_ge
 unsat
 (error "model is not available")
-2:15.05
+1:07.77
 End:   approx_sin_ge
 Start: approx_sin_ge_b1
 unsat
 (error "model is not available")
-0:56.44
+0:27.44
 End:   approx_sin_ge_b1
 Start: approx_sin_ge_b2
 unsat
 (error "model is not available")
-0:30.80
+0:15.41
 End:   approx_sin_ge_b2
 Start: approx_sin_ge_b3
 unsat
 (error "model is not available")
-0:00.18
+0:00.09
 End:   approx_sin_ge_b3
 Start: approx_sin_le
 unsat
 (error "model is not available")
-2:14.62
+1:07.92
 End:   approx_sin_le
 Start: approx_sin_le_b1
 unsat
 (error "model is not available")
-0:55.79
+0:30.17
 End:   approx_sin_le_b1
 Start: approx_sin_le_b2
 unsat
 (error "model is not available")
-0:30.30
+0:15.32
 End:   approx_sin_le_b2
 Start: approx_sin_le_b3
 unsat
 (error "model is not available")
-0:00.18
+0:00.09
 End:   approx_sin_le_b3
 Start: approx_cos_ge
 unsat
 (error "model is not available")
-0:10.63
+0:03.26
 End:   approx_cos_ge
 Start: approx_cos_ge_b1
 unsat
 (error "model is not available")
-0:00.99
+0:00.31
 End:   approx_cos_ge_b1
 Start: approx_cos_ge_b2
 unsat
 (error "model is not available")
-0:00.47
+0:00.14
 End:   approx_cos_ge_b2
 Start: approx_cos_ge_b3
 unsat
@@ -115,17 +105,17 @@ End:   approx_cos_ge_b3
 Start: approx_cos_le
 unsat
 (error "model is not available")
-0:05.11
+0:01.50
 End:   approx_cos_le
 Start: approx_cos_le_b1
 unsat
 (error "model is not available")
-0:00.93
+0:00.29
 End:   approx_cos_le_b1
 Start: approx_cos_le_b2
 unsat
 (error "model is not available")
-0:00.45
+0:00.13
 End:   approx_cos_le_b2
 Start: approx_cos_le_b3
 unsat
@@ -135,60 +125,40 @@ End:   approx_cos_le_b3
 Start: taylor_sin
 unsat
 (error "model is not available")
-0:00.02
+0:00.01
 End:   taylor_sin
 Start: taylor_sin_double
-At line 36 the following value would fall out of the range of the result type (long):
+At line 12 the following value would fall out of the range of the result type (long):
 4000000000000000000000
 terminate called after throwing an instance of 'std::out_of_range'
   what():  stol
 Command terminated by signal 6
 0:01.09
 End:   taylor_sin_double
-Start: taylor_sin_p_x_ge
-unsat
-(error "model is not available")
-0:00.00
-End:   taylor_sin_p_x_ge
-Start: taylor_sin_p_x_le
-unsat
-(error "model is not available")
-0:00.00
-End:   taylor_sin_p_x_le
 Start: taylor_sin_p
 unsat
 (error "model is not available")
-0:00.03
+0:00.01
 End:   taylor_sin_p
-Start: sinsin_onesin_pre_ge
-unsat
-(error "model is not available")
-0:00.00
-End:   sinsin_onesin_pre_ge
-Start: sinsin_onesin_pre_le
-unsat
-(error "model is not available")
-0:00.00
-End:   sinsin_onesin_pre_le
 Start: sinsin
 unsat
 (error "model is not available")
-7:15.81
+3:19.20
 End:   sinsin
 Start: sinsin_b1
 unsat
 (error "model is not available")
-0:00.25
+0:00.12
 End:   sinsin_b1
 Start: sinsin_b2
 unsat
 (error "model is not available")
-0:00.03
+0:00.02
 End:   sinsin_b2
 Start: sinsin_b3
 unsat
 (error "model is not available")
-0:00.01
+0:00.00
 End:   sinsin_b3
 Start: heron_init
 unsat
@@ -198,10 +168,10 @@ End:   heron_init
 Start: heron_pres
 unsat
 (error "model is not available")
-5:10.40
+5:03.28
 End:   heron_pres
 Start: sin_ge
-At line 66 the following value would fall out of the range of the result type (long):
+At line 42 the following value would fall out of the range of the result type (long):
 2500000000000000000000000
 terminate called after throwing an instance of 'std::out_of_range'
   what():  stol
@@ -209,10 +179,10 @@ Command terminated by signal 6
 0:01.09
 End:   sin_ge
 Start: sin_le
-At line 66 the following value would fall out of the range of the result type (long):
+At line 42 the following value would fall out of the range of the result type (long):
 2500000000000000000000000
 terminate called after throwing an instance of 'std::out_of_range'
   what():  stol
 Command terminated by signal 6
-0:01.10
+0:01.09
 End:   sin_le

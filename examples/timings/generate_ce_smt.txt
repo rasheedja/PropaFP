@@ -2,8 +2,8 @@ Start: taylor_sin_plus
 0:02.05
 End:   taylor_sin_plus
 Start: taylor_sin_swap
-0:02.05
+0:02.08
 End:   taylor_sin_swap
 Start: taylor_sin_tight
-0:02.10
+0:02.01
 End:   taylor_sin_tight
