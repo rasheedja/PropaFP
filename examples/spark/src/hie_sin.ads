@@ -23,7 +23,7 @@ package Hie_Sin with SPARK_Mode is
      (-3.0 <= Z and Z <= 3.0),
      Post =>
        (-12.0 <= Result and Result <= 12.0) and
-     Result = X * Y + Z;
+         Result = X * Y + Z;
 
    procedure My_Machine_Rounding (X : Float; Y : out Integer) with
      Pre =>

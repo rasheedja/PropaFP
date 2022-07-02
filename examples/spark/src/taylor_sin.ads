@@ -10,7 +10,6 @@ package Taylor_Sin with SPARK_Mode is
    function Taylor_Sin (X : Float) return Float with
      Pre => X >= -0.5 and X <= 0.5,
      Post => 
-       FC.To_Big_Real(Taylor_Sin'Result) <= To_Real(1) and
        abs(Real_Sin(FC.To_Big_Real(X)) - FC.To_Big_Real(Taylor_Sin'Result)) <= To_Real(25889) / To_Real(100000000);
                                                                                      
    function Taylor_Sin_Double (X : Long_Float) return Long_Float with
