@@ -1,6 +1,6 @@
 Start: my_machine_rounding_ge
 unsat
-0:00.45
+0:00.47
 End:   my_machine_rounding_ge
 Start: my_machine_rounding_le
 unsat
@@ -12,7 +12,7 @@ unsat
 End:   reduce_half_pi_x_ge
 Start: reduce_half_pi_x_le
 unsat
-0:00.32
+0:00.33
 End:   reduce_half_pi_x_le
 Start: reduce_half_pi_ge
 unsat
@@ -20,15 +20,15 @@ unsat
 End:   reduce_half_pi_ge
 Start: reduce_half_pi_le
 unsat
-0:00.02
+0:00.01
 End:   reduce_half_pi_le
 Start: approx_sin_ge
 unsat
-0:05.74
+0:05.63
 End:   approx_sin_ge
 Start: approx_sin_ge_b1
 unsat
-0:03.73
+0:03.72
 End:   approx_sin_ge_b1
 Start: approx_sin_ge_b2
 unsat
@@ -36,19 +36,19 @@ unsat
 End:   approx_sin_ge_b2
 Start: approx_sin_ge_b3
 unsat
-0:00.24
+0:00.25
 End:   approx_sin_ge_b3
 Start: approx_sin_le
 unsat
-0:05.79
+0:05.61
 End:   approx_sin_le
 Start: approx_sin_le_b1
 unsat
-0:05.19
+0:03.72
 End:   approx_sin_le_b1
 Start: approx_sin_le_b2
 unsat
-0:02.73
+0:02.69
 End:   approx_sin_le_b2
 Start: approx_sin_le_b3
 unsat
@@ -56,15 +56,15 @@ unsat
 End:   approx_sin_le_b3
 Start: approx_cos_ge
 unsat
-0:01.84
+0:01.83
 End:   approx_cos_ge
 Start: approx_cos_ge_b1
 unsat
-0:00.62
+0:00.61
 End:   approx_cos_ge_b1
 Start: approx_cos_ge_b2
 unsat
-0:00.52
+0:00.54
 End:   approx_cos_ge_b2
 Start: approx_cos_ge_b3
 unsat
@@ -80,11 +80,11 @@ unsat
 End:   approx_cos_le_b1
 Start: approx_cos_le_b2
 unsat
-0:00.49
+0:00.51
 End:   approx_cos_le_b2
 Start: approx_cos_le_b3
 unsat
-0:00.07
+0:00.06
 End:   approx_cos_le_b3
 Start: taylor_sin
 unsat
@@ -92,7 +92,7 @@ unsat
 End:   taylor_sin
 Start: taylor_sin_double
 unsat
-0:00.08
+0:00.05
 End:   taylor_sin_double
 Start: taylor_sin_p
 unsat
@@ -100,19 +100,19 @@ unsat
 End:   taylor_sin_p
 Start: sinsin
 unsat
-0:08.28
+0:08.20
 End:   sinsin
 Start: sinsin_b1
 unsat
-0:05.31
+0:05.25
 End:   sinsin_b1
 Start: sinsin_b2
 unsat
-0:01.36
+0:01.34
 End:   sinsin_b2
 Start: sinsin_b3
 unsat
-0:00.32
+0:00.33
 End:   sinsin_b3
 Start: heron_init
 unsat
@@ -120,13 +120,13 @@ unsat
 End:   heron_init
 Start: heron_pres
 unsat
-1:20.79
+1:19.99
 End:   heron_pres
 Start: sin_ge
 unsat
-6:36.53
+6:34.62
 End:   sin_ge
 Start: sin_le
 unsat
-6:35.89
+6:29.80
 End:   sin_le

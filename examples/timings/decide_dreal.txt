@@ -2,7 +2,7 @@ Start: my_machine_rounding_ge
 terminate called after throwing an instance of 'std::runtime_error'
   what():  No function definition for to_int_rna.
 Command terminated by signal 6
-0:01.15
+0:01.52
 End:   my_machine_rounding_ge
 Start: my_machine_rounding_le
 terminate called after throwing an instance of 'std::runtime_error'
@@ -24,7 +24,7 @@ At line 11 the following value would fall out of the range of the result type (l
 terminate called after throwing an instance of 'std::out_of_range'
   what():  stol
 Command terminated by signal 6
-0:01.10
+0:01.09
 End:   reduce_half_pi_x_le
 Start: reduce_half_pi_ge
 At line 11 the following value would fall out of the range of the result type (long):
@@ -40,22 +40,22 @@ At line 11 the following value would fall out of the range of the result type (l
 terminate called after throwing an instance of 'std::out_of_range'
   what():  stol
 Command terminated by signal 6
-0:01.09
+0:01.10
 End:   reduce_half_pi_le
 Start: approx_sin_ge
 unsat
 (error "model is not available")
-1:07.77
+1:08.95
 End:   approx_sin_ge
 Start: approx_sin_ge_b1
 unsat
 (error "model is not available")
-0:27.44
+0:28.27
 End:   approx_sin_ge_b1
 Start: approx_sin_ge_b2
 unsat
 (error "model is not available")
-0:15.41
+0:15.07
 End:   approx_sin_ge_b2
 Start: approx_sin_ge_b3
 unsat
@@ -65,17 +65,17 @@ End:   approx_sin_ge_b3
 Start: approx_sin_le
 unsat
 (error "model is not available")
-1:07.92
+1:06.16
 End:   approx_sin_le
 Start: approx_sin_le_b1
 unsat
 (error "model is not available")
-0:30.17
+0:28.73
 End:   approx_sin_le_b1
 Start: approx_sin_le_b2
 unsat
 (error "model is not available")
-0:15.32
+0:15.42
 End:   approx_sin_le_b2
 Start: approx_sin_le_b3
 unsat
@@ -85,7 +85,7 @@ End:   approx_sin_le_b3
 Start: approx_cos_ge
 unsat
 (error "model is not available")
-0:03.26
+0:03.28
 End:   approx_cos_ge
 Start: approx_cos_ge_b1
 unsat
@@ -105,7 +105,7 @@ End:   approx_cos_ge_b3
 Start: approx_cos_le
 unsat
 (error "model is not available")
-0:01.50
+0:01.53
 End:   approx_cos_le
 Start: approx_cos_le_b1
 unsat
@@ -115,7 +115,7 @@ End:   approx_cos_le_b1
 Start: approx_cos_le_b2
 unsat
 (error "model is not available")
-0:00.13
+0:00.14
 End:   approx_cos_le_b2
 Start: approx_cos_le_b3
 unsat
@@ -143,7 +143,7 @@ End:   taylor_sin_p
 Start: sinsin
 unsat
 (error "model is not available")
-3:19.20
+3:14.06
 End:   sinsin
 Start: sinsin_b1
 unsat
@@ -168,7 +168,7 @@ End:   heron_init
 Start: heron_pres
 unsat
 (error "model is not available")
-5:03.28
+5:06.14
 End:   heron_pres
 Start: sin_ge
 At line 42 the following value would fall out of the range of the result type (long):
@@ -184,5 +184,5 @@ At line 42 the following value would fall out of the range of the result type (l
 terminate called after throwing an instance of 'std::out_of_range'
   what():  stol
 Command terminated by signal 6
-0:01.09
+0:01.10
 End:   sin_le
