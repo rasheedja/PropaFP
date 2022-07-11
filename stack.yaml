@@ -31,8 +31,7 @@ resolver:
 #   - wai
 packages:
   - .
-  - aern2/aern2-mfun
-  - aern2/aern2-fun
+
 
 # Dependency packages to be pulled from upstream that are not in the resolver.
 # These entries can reference officially published versions as well as
@@ -44,12 +43,15 @@ packages:
 #   commit: e7b331f14bcffb8367cd58fbfc8b40ec7642100a
 #
 extra-deps:
-# smt2-parser
-- git: https://github.com/crvdgc/smt2-parser.git
-  commit: 5abbc3e8c021b572b3b157b12be14b80a6485f3f
 # simplex-haskell
-- git: https://github.com/rasheedja/simplex-haskell
+- git: https://github.com/rasheedja/simplex-haskell.git
   commit: 7cd1cd1def4d2b61a0d3fb5c1a0f22b6bb311691
+# aern2
+- git: https://github.com/michalkonecny/aern2.git
+  commit: 025005773f075280b89d8467b78cd74cb4e40cd5
+  subdirs:
+    - aern2-mfun
+    - aern2-fun
 
 # Override default flag values for local packages and extra-deps
 # flags: {}
