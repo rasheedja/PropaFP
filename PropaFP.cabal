@@ -63,9 +63,11 @@ library
     , bytestring
     , collect-errors
     , containers
+    , directory
     , extra
     , ghc
     , mixed-types-num
+    , optparse-applicative
     , parallel
     , pqueue
     , process
@@ -75,12 +77,10 @@ library
     , temporary
   default-language: Haskell2010
 
-executable PropaFP-exe
-  main-is: Main.hs
+executable propafp-prettify
+  main-is: app/PrettifySMT2.hs
   other-modules:
       Paths_PropaFP
-  hs-source-dirs:
-      app
   default-extensions:
       RebindableSyntax,
       ScopedTypeVariables,
@@ -92,7 +92,7 @@ executable PropaFP-exe
       FlexibleContexts,
       FlexibleInstances,
       UndecidableInstances
-  ghc-options: -threaded -rtsopts -with-rtsopts=-N
+  ghc-options: -threaded -rtsopts -with-rtsopts=-N -Wall -O2
   build-depends:
       PropaFP
     , QuickCheck
@@ -103,9 +103,91 @@ executable PropaFP-exe
     , bytestring
     , collect-errors
     , containers
+    , directory
     , extra
     , ghc
     , mixed-types-num
+    , optparse-applicative
+    , parallel
+    , pqueue
+    , process
+    , random
+    , regex-tdfa
+    , scientific
+    , temporary
+  default-language: Haskell2010
+
+executable propafp-translate-dreal
+  main-is: app/DRealTranslator.hs
+  other-modules:
+      Paths_PropaFP
+  default-extensions:
+      RebindableSyntax,
+      ScopedTypeVariables,
+      TypeFamilies,
+      TypeOperators,
+      ConstraintKinds,
+      DefaultSignatures,
+      MultiParamTypeClasses,
+      FlexibleContexts,
+      FlexibleInstances,
+      UndecidableInstances
+  ghc-options: -threaded -rtsopts -with-rtsopts=-N -Wall -O2
+  build-depends:
+      PropaFP
+    , QuickCheck
+    , aern2-mfun
+    , aern2-mp
+    , base >=4.7 && <5
+    , binary
+    , bytestring
+    , collect-errors
+    , containers
+    , directory
+    , extra
+    , ghc
+    , mixed-types-num
+    , optparse-applicative
+    , parallel
+    , pqueue
+    , process
+    , random
+    , regex-tdfa
+    , scientific
+    , temporary
+  default-language: Haskell2010
+
+executable propafp-translate-metitarski
+  main-is: app/MetiTarskiTranslator.hs
+  other-modules:
+      Paths_PropaFP
+  default-extensions:
+      RebindableSyntax,
+      ScopedTypeVariables,
+      TypeFamilies,
+      TypeOperators,
+      ConstraintKinds,
+      DefaultSignatures,
+      MultiParamTypeClasses,
+      FlexibleContexts,
+      FlexibleInstances,
+      UndecidableInstances
+  ghc-options: -threaded -rtsopts -with-rtsopts=-N -Wall -O2
+  build-depends:
+      PropaFP
+    , QuickCheck
+    , aern2-mfun
+    , aern2-mp
+    , base >=4.7 && <5
+    , binary
+    , bytestring
+    , collect-errors
+    , containers
+    , directory
+    , extra
+    , ghc
+    , mixed-types-num
+    , optparse-applicative
     , parallel
     , pqueue
     , process
@@ -144,9 +226,11 @@ test-suite PropaFP-test
     , bytestring
     , collect-errors
     , containers
+    , directory
     , extra
     , ghc
     , mixed-types-num
+    , optparse-applicative
     , parallel
     , pqueue
     , process
