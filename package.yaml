@@ -40,6 +40,18 @@ dependencies:
 - bytestring
 - process
 
+default-extensions:
+- RebindableSyntax,
+- ScopedTypeVariables,
+- TypeFamilies,
+- TypeOperators,
+- ConstraintKinds,
+- DefaultSignatures,
+- MultiParamTypeClasses,
+- FlexibleContexts,
+- FlexibleInstances,
+- UndecidableInstances
+
 library:
   source-dirs: src
 
