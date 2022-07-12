@@ -1183,7 +1183,7 @@ replaceEInF fContainingE eToFind eToReplace =
     FTrue          -> FTrue
     FFalse         -> FFalse
 
--- normalize to and or or
+-- |Normalize to and/or
 -- aggressively apply elimination rules
 normalizeBoolean :: F -> F
 normalizeBoolean form = 
