@@ -113,6 +113,19 @@ takeGoalFromAssertions asserts = (goal, assertsWithoutGoal)
 --   case lookup smtFunction functionsWithInputsAndOutputs of
 --     Just (inputs, output)
 
+-- |Attempts to parse FComp Ops, i.e. parse bool_eq to Just (FComp Eq)
+parseFCompOp :: String -> Maybe (E -> E -> F)
+parseFCompOp operator =
+  case operator of
+    n
+      | n `elem` [">=", "fp.geq", "oge", "oge__logic"] || (n =~ "^bool_ge$|^bool_ge[0-9]+$" :: Bool)     -> Just $ FComp Ge
+      | n `elem` [">",  "fp.gt", "ogt", "ogt__logic"] || (n =~ "^bool_gt$|^bool_gt[0-9]+$" :: Bool)      -> Just $ FComp Gt
+      | n `elem` ["<=", "fp.leq", "ole", "ole__logic"] || (n =~ "^bool_le$|^bool_le[0-9]+$" :: Bool)     -> Just $ FComp Le
+      | n `elem` ["<",  "fp.lt", "olt", "olt__logic"] || (n =~ "^bool_lt$|^bool_lt[0-9]+$" :: Bool)      -> Just $ FComp Lt
+      | n `elem` ["=",  "fp.eq"] || (n =~ "^bool_eq$|^bool_eq[0-9]+$|^user_eq$|^user_eq[0-9]+$" :: Bool) -> Just $ FComp Eq
+      | "bool_neq" `isPrefixOf` n                                                                        -> Just $ \e1 e2 -> FNot (FComp Eq e1 e2)
+    _ -> Nothing
+
 termToF :: LD.Expression -> [(String, ([String], String))] -> Maybe F
 termToF (LD.Application (LD.Variable operator) [op]) functionsWithInputsAndOutputs = -- Single param operators
   case termToE op functionsWithInputsAndOutputs of -- Ops with E params
@@ -139,14 +152,8 @@ termToF (LD.Application (LD.Variable operator) [op]) functionsWithInputsAndOutpu
 termToF (LD.Application (LD.Variable operator) [op1, op2]) functionsWithInputsAndOutputs = -- Two param operations
   case (termToE op1 functionsWithInputsAndOutputs, termToE op2 functionsWithInputsAndOutputs) of
     (Just e1, Just e2) ->
-      case operator of
-        n
-          | n `elem` [">=", "fp.geq", "oge", "oge__logic"] || (n =~ "^bool_ge$|^bool_ge[0-9]+$" :: Bool) -> Just $ FComp Ge e1 e2
-          | n `elem` [">",  "fp.gt", "ogt", "ogt__logic"] || (n =~ "^bool_gt$|^bool_gt[0-9]+$" :: Bool)  -> Just $ FComp Gt e1 e2
-          | n `elem` ["<=", "fp.leq", "ole", "ole__logic"] || (n =~ "^bool_le$|^bool_le[0-9]+$" :: Bool) -> Just $ FComp Le e1 e2
-          | n `elem` ["<",  "fp.lt", "olt", "olt__logic"] || (n =~ "^bool_lt$|^bool_lt[0-9]+$" :: Bool) -> Just $ FComp Lt e1 e2
-          | n `elem` ["=",  "fp.eq"]  -> Just $ FComp Eq e1 e2
-          | (n =~ "^bool_eq$|^bool_eq[0-9]+$|^user_eq$|^user_eq[0-9]+$" :: Bool) ->  Just $ FComp Eq e1 e2
+      case parseFCompOp operator of
+        Just fCompOp -> Just $ fCompOp e1 e2 
         _ -> Nothing
     (_, _) ->
       case (termToF op1 functionsWithInputsAndOutputs, termToF op2 functionsWithInputsAndOutputs) of
@@ -167,20 +174,11 @@ termToF (LD.Application (LD.Variable operator) [op1, op2]) functionsWithInputsAn
             (LD.Application (LD.Variable "ite") [cond, thenTerm, elseTerm], Just e2) ->
               case (termToF cond functionsWithInputsAndOutputs, termToE thenTerm functionsWithInputsAndOutputs, termToE elseTerm functionsWithInputsAndOutputs) of
                 (Just condF, Just thenTermE, Just elseTermE) ->
-                  case operator of
-                    n
-                      | n `elem` [">=", "fp.geq", "oge", "oge__logic"] || (n =~ "^bool_ge$|^bool_ge[0-9]+$" :: Bool)  -> Just $ FConn And (FConn Impl condF (FComp Ge thenTermE e2))
-                                                                                            (FConn Impl (FNot condF) (FComp Ge elseTermE e2))
-                      | n `elem` [">",  "fp.gt", "ogt", "ogt__logic"] || (n =~ "^bool_gt$|^bool_gt[0-9]+$" :: Bool)   -> Just $ FConn And (FConn Impl condF (FComp Gt thenTermE e2))
-                                                                                            (FConn Impl (FNot condF) (FComp Gt elseTermE e2))
-                      | n `elem` ["<=", "fp.leq", "ole", "ole__logic"] || (n =~ "^bool_le$|^bool_le[0-9]+$" :: Bool)  -> Just $ FConn And (FConn Impl condF (FComp Le thenTermE e2))
-                                                                                            (FConn Impl (FNot condF) (FComp Le elseTermE e2))
-                      | n `elem` ["<",  "fp.lt", "olt", "olt__logic"] || (n =~ "^bool_lt$|^bool_lt[0-9]+$" :: Bool)   -> Just $ FConn And (FConn Impl condF (FComp Lt thenTermE e2))
-                                                                                            (FConn Impl (FNot condF) (FComp Lt elseTermE e2))
-                      | n `elem` ["=",  "fp.eq"] || (n =~ "^bool_eq$|^bool_eq[0-9]+$|^user_eq$|^user_eq[0-9]+$" :: Bool)                       -> Just $ FConn And (FConn Impl condF (FComp Eq thenTermE e2))
-                                                                                            (FConn Impl (FNot condF) (FComp Eq elseTermE e2))
-                      | "bool_neq" `isPrefixOf` n                        -> Just $ FNot $ FConn And (FConn Impl condF (FComp Eq thenTermE e2))
-                                                                                            (FConn Impl (FNot condF) (FComp Eq elseTermE e2))
+                  case parseFCompOp operator of
+                    Just fCompOp -> 
+                      Just $ FConn And 
+                        (FConn Impl condF        (fCompOp thenTermE e2))
+                        (FConn Impl (FNot condF) (fCompOp elseTermE e2))
                     _ -> Nothing
                 (_, _, _) -> Nothing
             (_, _) ->
@@ -188,20 +186,11 @@ termToF (LD.Application (LD.Variable operator) [op1, op2]) functionsWithInputsAn
                 (Just e1, LD.Application (LD.Variable "ite") [cond, thenTerm, elseTerm]) ->
                   case (termToF cond functionsWithInputsAndOutputs, termToE thenTerm functionsWithInputsAndOutputs, termToE elseTerm functionsWithInputsAndOutputs) of
                     (Just condF, Just thenTermE, Just elseTermE) ->
-                      case operator of
-                        n -- TODO: Change these to AND
-                          | n `elem` [">=", "fp.geq", "oge", "oge__logic"] || (n =~ "^bool_ge$|^bool_ge[0-9]+$" :: Bool)  -> Just $ FConn And (FConn Impl condF (FComp Ge e1 thenTermE))
-                                                                                                (FConn Impl (FNot condF) (FComp Ge e1 elseTermE))
-                          | n `elem` [">",  "fp.gt", "ogt", "ogt__logic"] || (n =~ "^bool_gt$|^bool_gt[0-9]+$" :: Bool)   -> Just $ FConn And (FConn Impl condF (FComp Gt e1 thenTermE))
-                                                                                                (FConn Impl (FNot condF) (FComp Gt e1 elseTermE))
-                          | n `elem` ["<=", "fp.leq", "ole", "ole__logic"] || (n =~ "^bool_le$|^bool_le[0-9]+$" :: Bool)  -> Just $ FConn And (FConn Impl condF (FComp Le e1 thenTermE))
-                                                                                                (FConn Impl (FNot condF) (FComp Le e1 elseTermE))
-                          | n `elem` ["<",  "fp.lt", "olt", "olt__logic"] || (n =~ "^bool_lt$|^bool_lt[0-9]+$" :: Bool)   -> Just $ FConn And (FConn Impl condF (FComp Lt e1 thenTermE))
-                                                                                                (FConn Impl (FNot condF) (FComp Lt e1 elseTermE))
-                          | n `elem` ["=",  "fp.eq"] || (n =~ "^bool_eq$|^bool_eq[0-9]+$|^user_eq$|^user_eq[0-9]+$" :: Bool)                       -> Just $ FConn And (FConn Impl condF (FComp Eq e1 thenTermE))
-                                                                                                (FConn Impl (FNot condF) (FComp Eq e1 elseTermE))
-                          | "bool_neq" `isPrefixOf` n                        -> Just $ FNot $ FConn And (FConn Impl condF (FComp Eq e1 thenTermE))
-                                                                                  (FConn Impl (FNot condF) (FComp Eq e1 elseTermE))
+                      case parseFCompOp operator of
+                        Just fCompOp ->
+                          Just $ FConn And
+                            (FConn Impl condF        (fCompOp e1 thenTermE))
+                            (FConn Impl (FNot condF) (fCompOp e1 elseTermE))
                         _ -> Nothing
                     (_, _, _) -> Nothing
                 (_, _) -> Nothing
