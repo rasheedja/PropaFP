@@ -25,7 +25,6 @@ source-repository head
 
 library
   exposed-modules:
-      Lib
       PropaFP.DeriveBounds
       PropaFP.EliminateFloats
       PropaFP.Eliminator
