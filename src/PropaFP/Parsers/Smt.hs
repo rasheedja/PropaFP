@@ -126,6 +126,57 @@ parseFCompOp operator =
       | "bool_neq" `isPrefixOf` n                                                                        -> Just $ \e1 e2 -> FNot (FComp Eq e1 e2)
     _ -> Nothing
 
+-- parseIte :: LD.Expression -> LD.Expression -> LD.Expression -> Maybe F
+parseIte cond thenTerm elseTerm functionsWithInputsAndOutputs Nothing =
+  case termToF cond functionsWithInputsAndOutputs of
+    Just condF -> 
+      case (termToF thenTerm functionsWithInputsAndOutputs, termToF elseTerm functionsWithInputsAndOutputs) of
+        (Just thenTermF, Just elseTermF) -> 
+          Just $ FConn And
+            (FConn Impl condF        thenTermF)
+            (FConn Impl (FNot condF) elseTermF)
+        (_, _) -> Nothing
+    Nothing -> Nothing
+parseIte cond thenTerm elseTerm functionsWithInputsAndOutputs (Just compTerm) =
+  case termToF cond functionsWithInputsAndOutputs of
+    (Just condF) ->
+      case (termToE thenTerm functionsWithInputsAndOutputs, termToE elseTerm functionsWithInputsAndOutputs) of
+        (Just thenTermE, Just elseTermE) ->
+          Just $ FConn And
+            (FConn Impl condF            (compTerm thenTermE))
+            (FConn Impl (FNot condF)     (compTerm elseTermE))
+        (Just thenTermE, _) ->
+          case elseTerm of
+            LD.Application (LD.Variable "ite") [elseCond, elseThenTerm, elseElseTerm] ->
+              case parseIte elseCond elseThenTerm elseElseTerm functionsWithInputsAndOutputs (Just compTerm) of
+                Just elseTermF -> Just $
+                  FConn And
+                    (FConn Impl condF        (compTerm thenTermE))
+                    (FConn Impl (FNot condF) elseTermF)
+                _ -> Nothing
+            _ -> Nothing
+        (_, Just elseTermE) ->
+          case thenTerm of
+            LD.Application (LD.Variable "ite") [thenCond, thenThenTerm, thenElseTerm] ->
+              case parseIte thenCond thenThenTerm thenElseTerm functionsWithInputsAndOutputs (Just compTerm) of
+                Just thenTermF -> Just $
+                  FConn And
+                    (FConn Impl condF        thenTermF)
+                    (FConn Impl (FNot condF) (compTerm elseTermE))
+                _ -> Nothing
+            _ -> Nothing
+        (_, _) -> 
+          case (thenTerm, elseTerm) of
+            (LD.Application (LD.Variable "ite") [thenCond, thenThenTerm, thenElseTerm], LD.Application (LD.Variable "ite") [elseCond, elseThenTerm, elseElseTerm]) ->
+              case (parseIte thenCond thenThenTerm thenElseTerm functionsWithInputsAndOutputs (Just compTerm), parseIte elseCond elseThenTerm elseElseTerm functionsWithInputsAndOutputs (Just compTerm)) of
+                (Just thenTermF, Just elseTermF) -> Just $
+                  FConn And
+                    (FConn Impl condF        thenTermF)
+                    (FConn Impl (FNot condF) elseTermF)
+                (_, _) -> Nothing
+            (_, _) -> Nothing
+    Nothing -> Nothing
+
 termToF :: LD.Expression -> [(String, ([String], String))] -> Maybe F
 termToF (LD.Application (LD.Variable operator) [op]) functionsWithInputsAndOutputs = -- Single param operators
   case termToE op functionsWithInputsAndOutputs of -- Ops with E params
@@ -172,33 +223,19 @@ termToF (LD.Application (LD.Variable operator) [op1, op2]) functionsWithInputsAn
         (_, _) ->
           case (op1, termToE op2 functionsWithInputsAndOutputs) of
             (LD.Application (LD.Variable "ite") [cond, thenTerm, elseTerm], Just e2) ->
-              case (termToF cond functionsWithInputsAndOutputs, termToE thenTerm functionsWithInputsAndOutputs, termToE elseTerm functionsWithInputsAndOutputs) of
-                (Just condF, Just thenTermE, Just elseTermE) ->
-                  case parseFCompOp operator of
-                    Just fCompOp -> 
-                      Just $ FConn And 
-                        (FConn Impl condF        (fCompOp thenTermE e2))
-                        (FConn Impl (FNot condF) (fCompOp elseTermE e2))
-                    _ -> Nothing
-                (_, _, _) -> Nothing
+              case parseFCompOp operator of
+                Just fCompOp -> parseIte cond thenTerm elseTerm functionsWithInputsAndOutputs (Just (\e -> fCompOp e e2))
+                Nothing -> Nothing
             (_, _) ->
               case (termToE op1 functionsWithInputsAndOutputs, op2) of
                 (Just e1, LD.Application (LD.Variable "ite") [cond, thenTerm, elseTerm]) ->
-                  case (termToF cond functionsWithInputsAndOutputs, termToE thenTerm functionsWithInputsAndOutputs, termToE elseTerm functionsWithInputsAndOutputs) of
-                    (Just condF, Just thenTermE, Just elseTermE) ->
-                      case parseFCompOp operator of
-                        Just fCompOp ->
-                          Just $ FConn And
-                            (FConn Impl condF        (fCompOp e1 thenTermE))
-                            (FConn Impl (FNot condF) (fCompOp e1 elseTermE))
-                        _ -> Nothing
-                    (_, _, _) -> Nothing
+                  case parseFCompOp operator of
+                    Just fCompOp -> parseIte cond thenTerm elseTerm functionsWithInputsAndOutputs (Just (\e -> fCompOp e1 e))
+                    Nothing -> Nothing
                 (_, _) -> Nothing
 
-termToF (LD.Application (LD.Variable "ite") [condition, thenTerm, elseTerm]) functionsWithInputsAndOutputs = -- if-then-else operator with F types
-  case (termToF condition functionsWithInputsAndOutputs, termToF thenTerm functionsWithInputsAndOutputs, termToF elseTerm functionsWithInputsAndOutputs) of
-    (Just conditionF, Just thenTermF, Just elseTermF) -> Just $ FConn And (FConn Impl conditionF thenTermF) (FConn Impl (FNot conditionF) elseTermF)
-    (_, _, _) -> Nothing
+termToF (LD.Application (LD.Variable "ite") [cond, thenTerm, elseTerm]) functionsWithInputsAndOutputs = -- if-then-else operator with F types
+  parseIte cond thenTerm elseTerm functionsWithInputsAndOutputs Nothing
 termToF (LD.Variable "true") functionsWithInputsAndOutputs  = Just FTrue
 termToF (LD.Variable "false") functionsWithInputsAndOutputs = Just FFalse
 termToF _ _ = Nothing
