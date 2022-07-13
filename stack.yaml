@@ -32,7 +32,6 @@ resolver:
 packages:
   - .
 
-
 # Dependency packages to be pulled from upstream that are not in the resolver.
 # These entries can reference officially published versions as well as
 # forks / in-progress versions pinned to a git hash. For example:
@@ -46,10 +45,13 @@ extra-deps:
 # simplex-haskell
 - git: https://github.com/rasheedja/simplex-haskell.git
   commit: 7cd1cd1def4d2b61a0d3fb5c1a0f22b6bb311691
-# aern2
+# AERN2
 - git: https://github.com/michalkonecny/aern2.git
-  commit: 025005773f075280b89d8467b78cd74cb4e40cd5
+  commit: 74fdc2707bd95b7429dcef91b4375776c697aa6b
   subdirs:
+    - aern2-real
+    - aern2-mp
+    # - aern2-real
     - aern2-mfun
     - aern2-fun
 
