@@ -42,9 +42,6 @@ packages:
 #   commit: e7b331f14bcffb8367cd58fbfc8b40ec7642100a
 #
 extra-deps:
-# simplex-haskell
-- git: https://github.com/rasheedja/simplex-haskell.git
-  commit: 7cd1cd1def4d2b61a0d3fb5c1a0f22b6bb311691
 # AERN2
 - git: https://github.com/michalkonecny/aern2.git
   commit: 74fdc2707bd95b7429dcef91b4375776c697aa6b
