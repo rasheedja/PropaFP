@@ -354,17 +354,57 @@ simplifyF unsimplifiedF = if unsimplifiedF P.== simplifiedF then simplifiedF els
   where
     simplifiedF = simplify unsimplifiedF
 
+    -- Collapse x < y OR x = y to x <= y (and similar)
     simplify (FConn Or f1@(FComp Lt l1 r1) f2@(FComp Eq l2 r2)) = if l1 P.== l2 P.&& r1 P.== r2 then FComp Le l1 r1 else FConn Or (simplify f1) (simplify f2)
     simplify (FConn Or f1@(FComp Eq l1 r1) f2@(FComp Lt l2 r2)) = if l1 P.== l2 P.&& r1 P.== r2 then FComp Le l1 r1 else FConn Or (simplify f1) (simplify f2)
     simplify (FConn Or f1@(FComp Gt l1 r1) f2@(FComp Eq l2 r2)) = if l1 P.== l2 P.&& r1 P.== r2 then FComp Ge l1 r1 else FConn Or (simplify f1) (simplify f2)
     simplify (FConn Or f1@(FComp Eq l1 r1) f2@(FComp Gt l2 r2)) = if l1 P.== l2 P.&& r1 P.== r2 then FComp Ge l1 r1 else FConn Or (simplify f1) (simplify f2)
 
-    -- Boolean Rules
-    -- And
+    -- Eliminate implications with opposing conditions where the RHS is the same, replacing the two implications with the RHS
+    simplify (FConn And f1@(FConn Impl cond1 branch1) f2@(FConn Impl (FNot cond2) branch2)) =
+      if cond1 P.== cond2 && branch1 P.== branch2
+        then simplify branch1
+        else FConn And (simplify f1) (simplify f2)
+
     simplify (FConn And _ FFalse)                               = FFalse
     simplify (FConn And FFalse _)                               = FFalse
     simplify (FConn And f FTrue)                                = simplify f
     simplify (FConn And FTrue f)                                = simplify f
+
+    -- Collapse x /\ (!x \/ y) into x /\ y
+    simplify (FConn And x1 f2@(FConn Or (FNot x2) y)) = if x1 P.== x2 then simplify (FConn And x1 y) else FConn And (simplify x1) (simplify f2)
+    -- Collapse (!x \/ y) /\ x into y /\ x
+    simplify (FConn And f1@(FConn Or (FNot x1) y) x2) = if x1 P.== x2 then simplify (FConn And y x2) else FConn And (simplify f1) (simplify x2)
+    -- Collapse x /\ (y \/ !x) into x /\ y
+    simplify (FConn And x1 f2@(FConn Or y (FNot x2))) = if x1 P.== x2 then simplify (FConn And x1 y) else FConn And (simplify x1) (simplify f2)
+    -- Collapse (y \/ !x) /\ x into y /\ x
+    simplify (FConn And f1@(FConn Or y (FNot x1)) x2) = if x1 P.== x2 then simplify (FConn And y x2) else FConn And (simplify f1) (simplify x2)
+
+    simplify (FConn And f1@(FConn Or v1 v2) f2@(FNot v3))
+      -- Collapse (x \/ y) /\ !x into y /\ !x
+      | v3 P.== v1 = simplify (FConn And v2 (FNot v3))
+      -- Collapse (y \/ x) /\ !x into y /\ !x
+      | v3 P.== v2 = simplify (FConn And v1 (FNot v3))
+      -- Turn x /\ !x into false
+      | f1 P.== v3 = FFalse
+      | otherwise = FConn And (simplify f1) (simplify f2)
+
+    simplify (FConn And f1@(FNot v1) f2@(FConn Or v2 v3))
+      -- Collapse !x /\ (x \/ y) into !x /\ y
+      | v1 P.== v2 = simplify (FConn And (FNot v1) v3)
+      -- Collapse !x /\ (y \/ x) into !x /\ y
+      | v1 P.== v3 = simplify (FConn And (FNot v1) v2)
+      -- Turn !x /\ x into false
+      | v1 P.== f2 = FFalse
+      | otherwise = FConn And (simplify f1) (simplify f2)
+
+    -- Collapse x /\ (x -> y) into x /\ y
+    simplify (FConn And x1 f2@(FConn Impl x2 y)) = if x1 P.== x2 then simplify (FConn And x1 y) else FConn And (simplify x1) (simplify f2)
+    -- Collapse (x -> y) /\ x into y /\ x
+    simplify (FConn And f1@(FConn Impl x1 y) x2) = if x1 P.== x2 then simplify (FConn And y x2) else FConn And (simplify f1) (simplify x2)
+
+    -- Boolean Rules
+    -- And
     -- And contradictions and eliminations
     simplify (FConn And f1 fn2@(FNot f2))                       = if f1 P.== f2 then FFalse else FConn And (simplify f1) (simplify fn2)
     simplify (FConn And fn1@(FNot f1) f2)                       = if f1 P.== f2 then FFalse else FConn And (simplify fn1) (simplify f2)
@@ -1186,7 +1226,7 @@ replaceEInF fContainingE eToFind eToReplace =
 -- |Normalize to and/or
 -- aggressively apply elimination rules
 normalizeBoolean :: F -> F
-normalizeBoolean form = 
+normalizeBoolean form =
   if form P.== simplifiedForm
     then simplifiedForm
     else normalizeBoolean simplifiedForm
@@ -1212,7 +1252,7 @@ normalizeBoolean form =
     aggressiveSimplify (FConn Or f@(FNot (FConn Or y z)) x)
       | x P.== y  = aggressiveSimplify (FConn Or (FNot z) x)
       | x P.== z  = aggressiveSimplify (FConn Or (FNot y) x)
-      | otherwise = FConn Or (aggressiveSimplify f) (aggressiveSimplify x) 
+      | otherwise = FConn Or (aggressiveSimplify f) (aggressiveSimplify x)
     aggressiveSimplify (FNot (FNot f)) = aggressiveSimplify f
     -- aggressiveSimplify (FConn Or x f@(FConn And (FNot x') y)) = if x P.== x' then aggressiveSimplify (FConn Or x y) else (FConn Or (aggressiveSimplify x) (aggressiveSimplify f))
     -- aggressiveSimplify (FConn Or x f@(FConn And y (FNot x'))) = if x P.== x' then aggressiveSimplify (FConn Or x y) else (FConn Or (aggressiveSimplify x) (aggressiveSimplify f))
