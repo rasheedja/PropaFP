@@ -21,14 +21,11 @@ description:         Please see the README on GitHub at <https://github.com/rash
 
 dependencies:
 - base >= 4.7 && < 5
-- mixed-types-num
-- aern2-mfun
-- aern2-mp
-- parallel
-- collect-errors
+- mixed-types-num >= 0.5.10 && < 0.6
+- aern2-mfun >= 0.2.9 && < 0.3
+- aern2-mp >= 0.2.9.1 && < 0.3
+- collect-errors >= 0.1.5 && < 0.2
 - containers
-- pqueue
-# - fastlogger
 - extra
 - QuickCheck
 - ghc
@@ -36,7 +33,6 @@ dependencies:
 - binary
 - regex-tdfa
 - temporary
-- random
 - bytestring
 - process
 - directory

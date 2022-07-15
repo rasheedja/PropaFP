@@ -18,7 +18,7 @@
 # resolver: ./custom-snapshot.yaml
 # resolver: https://example.com/snapshots/2018-01-01.yaml
 resolver:
-  url: https://raw.githubusercontent.com/commercialhaskell/stackage-snapshots/master/lts/19/14.yaml
+  url: https://raw.githubusercontent.com/commercialhaskell/stackage-snapshots/master/lts/19/15.yaml
 
 # User packages to be built.
 # Various formats can be used as shown in the example below.
@@ -43,14 +43,12 @@ packages:
 #
 extra-deps:
 # AERN2
-- git: https://github.com/michalkonecny/aern2.git
-  commit: 74fdc2707bd95b7429dcef91b4375776c697aa6b
-  subdirs:
-    - aern2-real
-    - aern2-mp
-    # - aern2-real
-    - aern2-mfun
-    - aern2-fun
+  - aern2-real-0.2.9.0
+  - aern2-mp-0.2.9.1
+  # - aern2-real
+  - aern2-mfun-0.2.9.0
+  - aern2-fun-0.2.9.0
+  - mixed-types-num-0.5.10
 
 # Override default flag values for local packages and extra-deps
 # flags: {}
