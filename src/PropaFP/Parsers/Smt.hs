@@ -350,6 +350,7 @@ termToE (LD.Application (LD.Variable operator) [op1, op2]) functionsWithInputsAn
               | n `elem` ["*", "omultiply", "omultiply__logic"]          -> Just $ EBinOp Mul e1 e2
               | n `elem` ["/", "odivide", "odivide__logic"]              -> Just $ EBinOp Div e1 e2
               | (n =~ "^pow$|^pow[0-9]+$|^power$|^power[0-9]+$" :: Bool) -> Just $ EBinOp Pow e1 e2 --FIXME: remove int pow? only use int pow if actually specified?
+              | n == "^" -> Just $ EBinOp Pow e1 e2
                 -- case lookup n functionsWithInputsAndOutputs of
                 --   Just (["Real", "Real"], "Real") -> Just $ EBinOp Pow e1 e2
                 --   Just ([input1, "Int"], output) ->
