@@ -42,10 +42,8 @@ packages:
 #   commit: e7b331f14bcffb8367cd58fbfc8b40ec7642100a
 #
 extra-deps:
-# AERN2
   - aern2-real-0.2.9.0
   - aern2-mp-0.2.9.1
-  # - aern2-real
   - aern2-mfun-0.2.9.0
   - aern2-fun-0.2.9.0
   - mixed-types-num-0.5.10
