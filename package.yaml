@@ -84,6 +84,26 @@ executables:
     - -O2
     dependencies:
     - PropaFP
+  propafp-run-dreal:
+    main:                app/DRealRunner.hs
+    ghc-options:
+    - -threaded
+    - -rtsopts
+    - -with-rtsopts=-N
+    - -Wall
+    - -O2
+    dependencies:
+    - PropaFP
+  propafp-run-lppaver:
+    main:                app/LPPaverRunner.hs
+    ghc-options:
+    - -threaded
+    - -rtsopts
+    - -with-rtsopts=-N
+    - -Wall
+    - -O2
+    dependencies:
+    - PropaFP
 
 tests:
   PropaFP-test:
