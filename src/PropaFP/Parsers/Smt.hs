@@ -248,6 +248,25 @@ termToE (LD.Variable "true")  functionsWithInputsAndOutputs = Nothing -- These s
 termToE (LD.Variable "false") functionsWithInputsAndOutputs = Nothing -- These should be parsed to F
 termToE (LD.Variable var) functionsWithInputsAndOutputs = Just $ Var var
 termToE (LD.Number   num) functionsWithInputsAndOutputs    = Just $ Lit num
+-- one param PropaFP translator functions
+-- RoundToInt
+termToE (LD.Application (LD.Variable "to_int_rne") [p]) functionsWithInputsAndOutputs = RoundToInteger RNE <$> termToE p functionsWithInputsAndOutputs
+termToE (LD.Application (LD.Variable "to_int_rtp") [p]) functionsWithInputsAndOutputs = RoundToInteger RTP <$> termToE p functionsWithInputsAndOutputs
+termToE (LD.Application (LD.Variable "to_int_rtn") [p]) functionsWithInputsAndOutputs = RoundToInteger RTN <$> termToE p functionsWithInputsAndOutputs
+termToE (LD.Application (LD.Variable "to_int_rtz") [p]) functionsWithInputsAndOutputs = RoundToInteger RTZ <$> termToE p functionsWithInputsAndOutputs
+termToE (LD.Application (LD.Variable "to_int_rna") [p]) functionsWithInputsAndOutputs = RoundToInteger RNA <$> termToE p functionsWithInputsAndOutputs
+-- Float32
+termToE (LD.Application (LD.Variable "float32_rne") [p]) functionsWithInputsAndOutputs = Float32 RNE <$> termToE p functionsWithInputsAndOutputs
+termToE (LD.Application (LD.Variable "float32_rtp") [p]) functionsWithInputsAndOutputs = Float32 RTP <$> termToE p functionsWithInputsAndOutputs
+termToE (LD.Application (LD.Variable "float32_rtn") [p]) functionsWithInputsAndOutputs = Float32 RTN <$> termToE p functionsWithInputsAndOutputs
+termToE (LD.Application (LD.Variable "float32_rtz") [p]) functionsWithInputsAndOutputs = Float32 RTZ <$> termToE p functionsWithInputsAndOutputs
+termToE (LD.Application (LD.Variable "float32_rna") [p]) functionsWithInputsAndOutputs = Float32 RNA <$> termToE p functionsWithInputsAndOutputs
+-- Float64
+termToE (LD.Application (LD.Variable "float64_rne") [p]) functionsWithInputsAndOutputs = Float64 RNE <$> termToE p functionsWithInputsAndOutputs
+termToE (LD.Application (LD.Variable "float64_rtp") [p]) functionsWithInputsAndOutputs = Float64 RTP <$> termToE p functionsWithInputsAndOutputs
+termToE (LD.Application (LD.Variable "float64_rtn") [p]) functionsWithInputsAndOutputs = Float64 RTN <$> termToE p functionsWithInputsAndOutputs
+termToE (LD.Application (LD.Variable "float64_rtz") [p]) functionsWithInputsAndOutputs = Float64 RTZ <$> termToE p functionsWithInputsAndOutputs
+termToE (LD.Application (LD.Variable "float64_rna") [p]) functionsWithInputsAndOutputs = Float64 RNA <$> termToE p functionsWithInputsAndOutputs
 -- one param functions
 termToE (LD.Application (LD.Variable operator) [op]) functionsWithInputsAndOutputs =
   case termToE op functionsWithInputsAndOutputs of
@@ -317,7 +336,9 @@ termToE (LD.Application (LD.Variable operator) [op]) functionsWithInputsAndOutpu
           Just newFunctionAsExpression -> Just $ newFunctionAsExpression newFunctionArg
           Nothing -> Nothing
         -- Nothing -> functionAsExpression functionArg
-
+-- two param PropaFP translator functions
+termToE (LD.Application (LD.Variable "min") [p1, p2]) functionsWithInputsAndOutputs = EBinOp Min <$> termToE p1 functionsWithInputsAndOutputs <*> termToE p2 functionsWithInputsAndOutputs
+termToE (LD.Application (LD.Variable "max") [p1, p2]) functionsWithInputsAndOutputs = EBinOp Max <$> termToE p1 functionsWithInputsAndOutputs <*> termToE p2 functionsWithInputsAndOutputs
 -- two param functions 
 -- params are either two different E types, or one param is a rounding mode and another is the arg
 termToE (LD.Application (LD.Variable operator) [op1, op2]) functionsWithInputsAndOutputs =
