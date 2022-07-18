@@ -241,6 +241,8 @@ termToF (LD.Variable "false") functionsWithInputsAndOutputs = Just FFalse
 termToF _ _ = Nothing
 
 termToE :: LD.Expression -> [(String, ([String], String))] -> Maybe E
+-- Parse 4 * atan(1) as Pi (used by our dReal SMT translator)
+termToE (LD.Application (LD.Variable "*") [LD.Number 4, LD.Application (LD.Variable "atan") [LD.Number 1]]) functionsWithInputsAndOutputs = Just $ Pi
 -- Symbols/Literals
 termToE (LD.Variable "true")  functionsWithInputsAndOutputs = Nothing -- These should be parsed to F
 termToE (LD.Variable "false") functionsWithInputsAndOutputs = Nothing -- These should be parsed to F
