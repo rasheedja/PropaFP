@@ -32,8 +32,8 @@ proverOptions = ProverOptions
       <> metavar "filePath"
     )
 
-runDReal :: ProverOptions -> IO ()
-runDReal (ProverOptions filePath lppaverPath) =
+runLPPaver :: ProverOptions -> IO ()
+runLPPaver (ProverOptions filePath lppaverPath) =
   do
     -- PATH needs to include folder containing FPTaylor binary after make
     -- symlink to the binary in somewhere like ~/.local/bin will NOT work reliably
@@ -58,7 +58,7 @@ runDReal (ProverOptions filePath lppaverPath) =
 main :: IO ()
 main = 
   do 
-    runDReal =<< execParser opts
+    runLPPaver =<< execParser opts
     where
       opts = info (proverOptions <**> helper)
         ( fullDesc

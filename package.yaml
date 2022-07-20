@@ -104,6 +104,16 @@ executables:
     - -O2
     dependencies:
     - PropaFP
+  propafp-run-metitarski:
+    main:                app/MetiTarskiRunner.hs
+    ghc-options:
+    - -threaded
+    - -rtsopts
+    - -with-rtsopts=-N
+    - -Wall
+    - -O2
+    dependencies:
+    - PropaFP
 
 tests:
   PropaFP-test:

@@ -184,6 +184,43 @@ executable propafp-run-lppaver
     , temporary
   default-language: Haskell2010
 
+executable propafp-run-metitarski
+  main-is: app/MetiTarskiRunner.hs
+  other-modules:
+      Paths_PropaFP
+  default-extensions:
+      RebindableSyntax,
+      ScopedTypeVariables,
+      TypeFamilies,
+      TypeOperators,
+      ConstraintKinds,
+      DefaultSignatures,
+      MultiParamTypeClasses,
+      FlexibleContexts,
+      FlexibleInstances,
+      UndecidableInstances
+  ghc-options: -threaded -rtsopts -with-rtsopts=-N -Wall -O2
+  build-depends:
+      PropaFP
+    , QuickCheck
+    , aern2-mfun >=0.2.9 && <0.3
+    , aern2-mp >=0.2.9.1 && <0.3
+    , base >=4.7 && <5
+    , binary
+    , bytestring
+    , collect-errors >=0.1.5 && <0.2
+    , containers
+    , directory
+    , extra
+    , ghc
+    , mixed-types-num >=0.5.10 && <0.6
+    , optparse-applicative
+    , process
+    , regex-tdfa
+    , scientific
+    , temporary
+  default-language: Haskell2010
+
 executable propafp-translate-dreal
   main-is: app/DRealTranslator.hs
   other-modules:
