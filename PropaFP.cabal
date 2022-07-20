@@ -5,7 +5,7 @@ cabal-version: 1.12
 -- see: https://github.com/sol/hpack
 
 name:           PropaFP
-version:        0.0.1
+version:        0.1.0.0
 description:    Please see the README on GitHub at <https://github.com/rasheedja/PropaFP#readme>
 homepage:       https://github.com/rasheedja/PropaFP#readme
 bug-reports:    https://github.com/rasheedja/PropaFP/issues
@@ -54,23 +54,23 @@ library
       FlexibleInstances,
       UndecidableInstances
   build-depends:
-      QuickCheck
+      QuickCheck >=2.14.2 && <2.15
     , aern2-mfun >=0.2.9 && <0.3
     , aern2-mp >=0.2.9.1 && <0.3
     , base >=4.7 && <5
-    , binary
-    , bytestring
+    , binary >=0.8.8.0 && <0.9
+    , bytestring >=0.10.12.1 && <0.11
     , collect-errors >=0.1.5 && <0.2
-    , containers
-    , directory
-    , extra
-    , ghc
+    , containers >=0.6.4.1 && <0.7
+    , directory >=1.3.6.2 && <1.4
+    , extra >=1.7.10 && <1.8
+    , ghc >=9.0.2 && <9.1
     , mixed-types-num >=0.5.10 && <0.6
-    , optparse-applicative
-    , process
-    , regex-tdfa
-    , scientific
-    , temporary
+    , optparse-applicative >=0.16.1.0 && <0.17
+    , process >=1.6.13.2 && <1.7
+    , regex-tdfa >=1.3.1.2 && <1.4
+    , scientific >=0.3.7.0 && <0.3.8
+    , temporary ==1.3.*
   default-language: Haskell2010
 
 executable propafp-prettify
@@ -91,23 +91,23 @@ executable propafp-prettify
   ghc-options: -threaded -rtsopts -with-rtsopts=-N -Wall -O2
   build-depends:
       PropaFP
-    , QuickCheck
+    , QuickCheck >=2.14.2 && <2.15
     , aern2-mfun >=0.2.9 && <0.3
     , aern2-mp >=0.2.9.1 && <0.3
     , base >=4.7 && <5
-    , binary
-    , bytestring
+    , binary >=0.8.8.0 && <0.9
+    , bytestring >=0.10.12.1 && <0.11
     , collect-errors >=0.1.5 && <0.2
-    , containers
-    , directory
-    , extra
-    , ghc
+    , containers >=0.6.4.1 && <0.7
+    , directory >=1.3.6.2 && <1.4
+    , extra >=1.7.10 && <1.8
+    , ghc >=9.0.2 && <9.1
     , mixed-types-num >=0.5.10 && <0.6
-    , optparse-applicative
-    , process
-    , regex-tdfa
-    , scientific
-    , temporary
+    , optparse-applicative >=0.16.1.0 && <0.17
+    , process >=1.6.13.2 && <1.7
+    , regex-tdfa >=1.3.1.2 && <1.4
+    , scientific >=0.3.7.0 && <0.3.8
+    , temporary ==1.3.*
   default-language: Haskell2010
 
 executable propafp-run-dreal
@@ -128,23 +128,23 @@ executable propafp-run-dreal
   ghc-options: -threaded -rtsopts -with-rtsopts=-N -Wall -O2
   build-depends:
       PropaFP
-    , QuickCheck
+    , QuickCheck >=2.14.2 && <2.15
     , aern2-mfun >=0.2.9 && <0.3
     , aern2-mp >=0.2.9.1 && <0.3
     , base >=4.7 && <5
-    , binary
-    , bytestring
+    , binary >=0.8.8.0 && <0.9
+    , bytestring >=0.10.12.1 && <0.11
     , collect-errors >=0.1.5 && <0.2
-    , containers
-    , directory
-    , extra
-    , ghc
+    , containers >=0.6.4.1 && <0.7
+    , directory >=1.3.6.2 && <1.4
+    , extra >=1.7.10 && <1.8
+    , ghc >=9.0.2 && <9.1
     , mixed-types-num >=0.5.10 && <0.6
-    , optparse-applicative
-    , process
-    , regex-tdfa
-    , scientific
-    , temporary
+    , optparse-applicative >=0.16.1.0 && <0.17
+    , process >=1.6.13.2 && <1.7
+    , regex-tdfa >=1.3.1.2 && <1.4
+    , scientific >=0.3.7.0 && <0.3.8
+    , temporary ==1.3.*
   default-language: Haskell2010
 
 executable propafp-run-lppaver
@@ -165,23 +165,23 @@ executable propafp-run-lppaver
   ghc-options: -threaded -rtsopts -with-rtsopts=-N -Wall -O2
   build-depends:
       PropaFP
-    , QuickCheck
+    , QuickCheck >=2.14.2 && <2.15
     , aern2-mfun >=0.2.9 && <0.3
     , aern2-mp >=0.2.9.1 && <0.3
     , base >=4.7 && <5
-    , binary
-    , bytestring
+    , binary >=0.8.8.0 && <0.9
+    , bytestring >=0.10.12.1 && <0.11
     , collect-errors >=0.1.5 && <0.2
-    , containers
-    , directory
-    , extra
-    , ghc
+    , containers >=0.6.4.1 && <0.7
+    , directory >=1.3.6.2 && <1.4
+    , extra >=1.7.10 && <1.8
+    , ghc >=9.0.2 && <9.1
     , mixed-types-num >=0.5.10 && <0.6
-    , optparse-applicative
-    , process
-    , regex-tdfa
-    , scientific
-    , temporary
+    , optparse-applicative >=0.16.1.0 && <0.17
+    , process >=1.6.13.2 && <1.7
+    , regex-tdfa >=1.3.1.2 && <1.4
+    , scientific >=0.3.7.0 && <0.3.8
+    , temporary ==1.3.*
   default-language: Haskell2010
 
 executable propafp-run-metitarski
@@ -202,23 +202,23 @@ executable propafp-run-metitarski
   ghc-options: -threaded -rtsopts -with-rtsopts=-N -Wall -O2
   build-depends:
       PropaFP
-    , QuickCheck
+    , QuickCheck >=2.14.2 && <2.15
     , aern2-mfun >=0.2.9 && <0.3
     , aern2-mp >=0.2.9.1 && <0.3
     , base >=4.7 && <5
-    , binary
-    , bytestring
+    , binary >=0.8.8.0 && <0.9
+    , bytestring >=0.10.12.1 && <0.11
     , collect-errors >=0.1.5 && <0.2
-    , containers
-    , directory
-    , extra
-    , ghc
+    , containers >=0.6.4.1 && <0.7
+    , directory >=1.3.6.2 && <1.4
+    , extra >=1.7.10 && <1.8
+    , ghc >=9.0.2 && <9.1
     , mixed-types-num >=0.5.10 && <0.6
-    , optparse-applicative
-    , process
-    , regex-tdfa
-    , scientific
-    , temporary
+    , optparse-applicative >=0.16.1.0 && <0.17
+    , process >=1.6.13.2 && <1.7
+    , regex-tdfa >=1.3.1.2 && <1.4
+    , scientific >=0.3.7.0 && <0.3.8
+    , temporary ==1.3.*
   default-language: Haskell2010
 
 executable propafp-translate-dreal
@@ -239,23 +239,23 @@ executable propafp-translate-dreal
   ghc-options: -threaded -rtsopts -with-rtsopts=-N -Wall -O2
   build-depends:
       PropaFP
-    , QuickCheck
+    , QuickCheck >=2.14.2 && <2.15
     , aern2-mfun >=0.2.9 && <0.3
     , aern2-mp >=0.2.9.1 && <0.3
     , base >=4.7 && <5
-    , binary
-    , bytestring
+    , binary >=0.8.8.0 && <0.9
+    , bytestring >=0.10.12.1 && <0.11
     , collect-errors >=0.1.5 && <0.2
-    , containers
-    , directory
-    , extra
-    , ghc
+    , containers >=0.6.4.1 && <0.7
+    , directory >=1.3.6.2 && <1.4
+    , extra >=1.7.10 && <1.8
+    , ghc >=9.0.2 && <9.1
     , mixed-types-num >=0.5.10 && <0.6
-    , optparse-applicative
-    , process
-    , regex-tdfa
-    , scientific
-    , temporary
+    , optparse-applicative >=0.16.1.0 && <0.17
+    , process >=1.6.13.2 && <1.7
+    , regex-tdfa >=1.3.1.2 && <1.4
+    , scientific >=0.3.7.0 && <0.3.8
+    , temporary ==1.3.*
   default-language: Haskell2010
 
 executable propafp-translate-metitarski
@@ -276,23 +276,23 @@ executable propafp-translate-metitarski
   ghc-options: -threaded -rtsopts -with-rtsopts=-N -Wall -O2
   build-depends:
       PropaFP
-    , QuickCheck
+    , QuickCheck >=2.14.2 && <2.15
     , aern2-mfun >=0.2.9 && <0.3
     , aern2-mp >=0.2.9.1 && <0.3
     , base >=4.7 && <5
-    , binary
-    , bytestring
+    , binary >=0.8.8.0 && <0.9
+    , bytestring >=0.10.12.1 && <0.11
     , collect-errors >=0.1.5 && <0.2
-    , containers
-    , directory
-    , extra
-    , ghc
+    , containers >=0.6.4.1 && <0.7
+    , directory >=1.3.6.2 && <1.4
+    , extra >=1.7.10 && <1.8
+    , ghc >=9.0.2 && <9.1
     , mixed-types-num >=0.5.10 && <0.6
-    , optparse-applicative
-    , process
-    , regex-tdfa
-    , scientific
-    , temporary
+    , optparse-applicative >=0.16.1.0 && <0.17
+    , process >=1.6.13.2 && <1.7
+    , regex-tdfa >=1.3.1.2 && <1.4
+    , scientific >=0.3.7.0 && <0.3.8
+    , temporary ==1.3.*
   default-language: Haskell2010
 
 test-suite PropaFP-test
@@ -316,21 +316,21 @@ test-suite PropaFP-test
   ghc-options: -threaded -rtsopts -with-rtsopts=-N
   build-depends:
       PropaFP
-    , QuickCheck
+    , QuickCheck >=2.14.2 && <2.15
     , aern2-mfun >=0.2.9 && <0.3
     , aern2-mp >=0.2.9.1 && <0.3
     , base >=4.7 && <5
-    , binary
-    , bytestring
+    , binary >=0.8.8.0 && <0.9
+    , bytestring >=0.10.12.1 && <0.11
     , collect-errors >=0.1.5 && <0.2
-    , containers
-    , directory
-    , extra
-    , ghc
+    , containers >=0.6.4.1 && <0.7
+    , directory >=1.3.6.2 && <1.4
+    , extra >=1.7.10 && <1.8
+    , ghc >=9.0.2 && <9.1
     , mixed-types-num >=0.5.10 && <0.6
-    , optparse-applicative
-    , process
-    , regex-tdfa
-    , scientific
-    , temporary
+    , optparse-applicative >=0.16.1.0 && <0.17
+    , process >=1.6.13.2 && <1.7
+    , regex-tdfa >=1.3.1.2 && <1.4
+    , scientific >=0.3.7.0 && <0.3.8
+    , temporary ==1.3.*
   default-language: Haskell2010
