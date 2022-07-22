@@ -1,10 +1,5 @@
 # PropaFP
 
-<!-- TODO: Emphasise integration with GNAT Studio/SPARK/Ada , verifying floating-point programs -->
-<!-- TODO: Add figure from paper for above -->
-<!-- TODO: Add to first paragraph -->
-<!-- TODO: Stack install instructions -->
-
 PropaFP is a tool used for auto-active verification of Floating-Point programs.
 PropaFP can be used for the verification of [SPARK][1]/[Ada][2] floating-point programs and is integrated with [GNAT Studio 2022](https://www.adacore.com/gnatpro/toolsuite/gnatstudio).
 
