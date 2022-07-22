@@ -52,7 +52,7 @@ runDReal (ProverOptions filePath dRealPath) =
                 do
                   hPutStr fHandle dRealInput
                   _ <- hGetContents fHandle -- Ensure handler has finished writing before calling DReal
-                  readProcessWithExitCode dRealPath [fPath] []
+                  readProcessWithExitCode dRealPath [fPath, "--precision", "1e-100"] []
           Nothing         -> error "Issue generating input for DReal"
 
 main :: IO ()
