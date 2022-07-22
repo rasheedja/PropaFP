@@ -11,8 +11,9 @@ import GHC.IO.Handle
 
 data ProverOptions = ProverOptions
   {
-    fileName :: String,
-    dRealPath :: String
+    filePath :: String,
+    lppaverPath :: String,
+    ceMode :: Bool
   }
 
 proverOptions :: Parser ProverOptions
@@ -31,9 +32,15 @@ proverOptions = ProverOptions
       <> help "path to LPPaver executable"
       <> metavar "filePath"
     )
+    <*> switch
+    (
+      long "counter-example-mode"
+      <> short 'c'
+      <> help "Runs LPPaver in a specialised mode to find potential counter-examples"
+    )
 
 runLPPaver :: ProverOptions -> IO ()
-runLPPaver (ProverOptions filePath lppaverPath) =
+runLPPaver (ProverOptions filePath lppaverPath ceMode) =
   do
     -- PATH needs to include folder containing FPTaylor binary after make
     -- symlink to the binary in somewhere like ~/.local/bin will NOT work reliably
@@ -52,7 +59,7 @@ runLPPaver (ProverOptions filePath lppaverPath) =
                 do
                   hPutStr fHandle dRealInput
                   _ <- hGetContents fHandle -- Ensure handler has finished writing before calling DReal
-                  readProcessWithExitCode lppaverPath [fPath] []
+                  readProcessWithExitCode lppaverPath (if ceMode then ["-f", fPath, "-c"] else ["-f", fPath]) []
           Nothing         -> error "Issue generating input for LPPaver"
 
 main :: IO ()
