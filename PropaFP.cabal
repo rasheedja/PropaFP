@@ -6,7 +6,9 @@ cabal-version: 1.12
 
 name:           PropaFP
 version:        0.1.0.0
+synopsis:       Auto-active verification of floating-point programs
 description:    Please see the README on GitHub at <https://github.com/rasheedja/PropaFP#readme>
+category:       Math, Maths, Mathematics, Formal methods, Theorem Provers
 homepage:       https://github.com/rasheedja/PropaFP#readme
 bug-reports:    https://github.com/rasheedja/PropaFP/issues
 author:         Junaid Rasheed
