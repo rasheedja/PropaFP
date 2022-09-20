@@ -77,7 +77,7 @@ expressionToFPTaylor (RoundToInteger mode e) = expressionToFPTaylor e -- FIXME: 
 
 variableBoundsToFPTaylor :: VarMap -> String
 variableBoundsToFPTaylor [] = ""
-variableBoundsToFPTaylor ((v, (l, r)) : vs) = "real " ++ show v ++ " in [" ++ showFrac l ++ ", " ++ showFrac r ++ "];\n" ++ variableBoundsToFPTaylor vs
+variableBoundsToFPTaylor ((v, (l, r)) : vs) = "real " ++ v ++ " in [" ++ showFrac l ++ ", " ++ showFrac r ++ "];\n" ++ variableBoundsToFPTaylor vs
   where
 
 showFrac :: Rational -> [Char]
