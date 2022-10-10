@@ -8,6 +8,9 @@
 - Add `eliminate_if` transformation to the PropaFP Why3 driver
   - This transformation performs simplifications that PropaFP cannot currently do, making some problems easier for provers
 - Regenerate Why3 SMT files using new driver
+- Add test suite
+  - Tests dReal(/LPPaver) and MetiTarski translators
+  - Checks that PropaFP generated files are the same as the processed files stored under the examples folder
 
 ## [v0.1.0.0](https://github.com/rasheedja/propaFP/tree/0.1.0.0)
 
