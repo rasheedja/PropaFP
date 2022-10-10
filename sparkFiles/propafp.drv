@@ -17,7 +17,7 @@ transformation "simplify_formula"
 transformation "simplify_trivial_quantification"
 transformation "simplify_array"
 transformation "introduce_premises"
-(* transformation "eliminate_if" *)
+transformation "eliminate_if"
 transformation "inline_all"
 transformation "eliminate_let"
 

@@ -837,7 +837,7 @@
             x))))))))
 
 ;; Goal def'vc
-;; File "hie_sin.ads", line 60, characters 0-0
+;; File "hie_sin.ads", line 52, characters 0-0
 (assert
   (not
   (=>
