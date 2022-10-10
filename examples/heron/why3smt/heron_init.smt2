@@ -138,6 +138,15 @@
 ;; pow2
 (declare-fun pow2 (Int) Int)
 
+;; abs'def
+(assert
+  (forall ((x Real))
+    (! (and
+         (=> (or (< 0.0 x) (= 0.0 x)) (= (ite (>= x 0.0) x (- x)) x))
+         (=>
+           (not (or (< 0.0 x) (= 0.0 x)))
+           (= (ite (>= x 0.0) x (- x)) (- x)))) :pattern ((ite (>= x 0.0) x (- x))) )))
+
 ;; of_int
 (declare-fun of_int (RoundingMode
   Int) Float32)
@@ -179,6 +188,102 @@
       (and (or (< 0.0 x) (= 0.0 x)) (or (< x y) (= x y)))
       (or (< (sqrt1 x) (sqrt1 y)) (= (sqrt1 x) (sqrt1 y))))))
 
+;; copy_sign
+(declare-fun copy_sign (Float32
+  Float32) Float32)
+
+;; copy_sign'def
+(assert
+  (forall ((x Float32) (y Float32))
+    (! (and
+         (=>
+           (or
+             (and (fp.isPositive x) (fp.isPositive y))
+             (and (fp.isNegative x) (fp.isNegative y)))
+           (= (copy_sign x y) x))
+         (=>
+           (not
+             (or
+               (and (fp.isPositive x) (fp.isPositive y))
+               (and (fp.isNegative x) (fp.isNegative y))))
+           (= (copy_sign x y) (fp.neg x)))) :pattern ((copy_sign x y)) )))
+
+;; bool_lt
+(declare-fun bool_lt (Float32
+  Float32) Bool)
+
+;; bool_lt'def
+(assert
+  (forall ((x Float32) (y Float32))
+    (! (and
+         (=> (fp.lt x y) (= (bool_lt x y) true))
+         (=> (not (fp.lt x y)) (= (bool_lt x y) false))) :pattern ((bool_lt
+                                                                    x
+                                                                    y)) )))
+
+;; bool_le
+(declare-fun bool_le (Float32
+  Float32) Bool)
+
+;; bool_le'def
+(assert
+  (forall ((x Float32) (y Float32))
+    (! (and
+         (=> (fp.leq x y) (= (bool_le x y) true))
+         (=> (not (fp.leq x y)) (= (bool_le x y) false))) :pattern ((bool_le
+                                                                    x
+                                                                    y)) )))
+
+;; bool_gt
+(declare-fun bool_gt (Float32
+  Float32) Bool)
+
+;; bool_gt'def
+(assert
+  (forall ((x Float32) (y Float32))
+    (! (and
+         (=> (fp.lt y x) (= (bool_gt x y) true))
+         (=> (not (fp.lt y x)) (= (bool_gt x y) false))) :pattern ((bool_gt
+                                                                    x
+                                                                    y)) )))
+
+;; bool_ge
+(declare-fun bool_ge (Float32
+  Float32) Bool)
+
+;; bool_ge'def
+(assert
+  (forall ((x Float32) (y Float32))
+    (! (and
+         (=> (fp.leq y x) (= (bool_ge x y) true))
+         (=> (not (fp.leq y x)) (= (bool_ge x y) false))) :pattern ((bool_ge
+                                                                    x
+                                                                    y)) )))
+
+;; bool_eq
+(declare-fun bool_eq (Float32
+  Float32) Bool)
+
+;; bool_eq'def
+(assert
+  (forall ((x Float32) (y Float32))
+    (! (and
+         (=> (fp.eq x y) (= (bool_eq x y) true))
+         (=> (not (fp.eq x y)) (= (bool_eq x y) false))) :pattern ((bool_eq
+                                                                    x
+                                                                    y)) )))
+
+;; bool_neq
+(declare-fun bool_neq (Float32
+  Float32) Bool)
+
+;; bool_neq'def
+(assert
+  (forall ((x Float32) (y Float32))
+    (! (and
+         (=> (not (fp.eq x y)) (= (bool_neq x y) true))
+         (=> (fp.eq x y) (= (bool_neq x y) false))) :pattern ((bool_neq x y)) )))
+
 ;; rem
 (declare-fun rem1 (Float32
   Float32) Float32)
@@ -192,6 +297,39 @@
 (declare-datatypes ((t__ref 0))
   (((t__refqtmk (t__content Float32)))))
 
+;; bool_eq
+(declare-fun bool_eq1 (Bool
+  Bool) Bool)
+
+;; bool_eq'def
+(assert
+  (forall ((x Bool) (y Bool))
+    (! (and
+         (=> (= x y) (= (bool_eq1 x y) true))
+         (=> (not (= x y)) (= (bool_eq1 x y) false))) :pattern ((bool_eq1
+                                                                  x
+                                                                  y)) )))
+
+;; to_int
+(declare-fun to_int2 (Bool) Int)
+
+;; to_int'def
+(assert
+  (forall ((b Bool))
+    (! (and
+         (=> (= b true) (= (to_int2 b) 1))
+         (=> (not (= b true)) (= (to_int2 b) 0))) :pattern ((to_int2 b)) )))
+
+;; of_int
+(declare-fun of_int1 (Int) Bool)
+
+;; of_int'def
+(assert
+  (forall ((i Int))
+    (! (and
+         (=> (= i 0) (= (of_int1 i) false))
+         (=> (not (= i 0)) (= (of_int1 i) true))) :pattern ((of_int1 i)) )))
+
 ;; attr__ATTRIBUTE_IMAGE
 (declare-fun attr__ATTRIBUTE_IMAGE (Bool) us_image)
 
@@ -202,7 +340,7 @@
 (declare-fun attr__ATTRIBUTE_VALUE (us_image) Bool)
 
 ;; bool_eq
-(declare-fun bool_eq (Real
+(declare-fun bool_eq2 (Real
   Real) Bool)
 
 ;; bool_ne
@@ -210,24 +348,24 @@
   Real) Bool)
 
 ;; bool_lt
-(declare-fun bool_lt (Real
+(declare-fun bool_lt1 (Real
   Real) Bool)
 
 ;; bool_le
-(declare-fun bool_le (Real
+(declare-fun bool_le1 (Real
   Real) Bool)
 
 ;; bool_gt
-(declare-fun bool_gt (Real
+(declare-fun bool_gt1 (Real
   Real) Bool)
 
 ;; bool_ge
-(declare-fun bool_ge (Real
+(declare-fun bool_ge1 (Real
   Real) Bool)
 
 ;; bool_eq_axiom
 (assert
-  (forall ((x Real)) (forall ((y Real)) (= (= (bool_eq x y) true) (= x y)))))
+  (forall ((x Real)) (forall ((y Real)) (= (= (bool_eq2 x y) true) (= x y)))))
 
 ;; bool_ne_axiom
 (assert
@@ -236,26 +374,39 @@
 
 ;; bool_lt_axiom
 (assert
-  (forall ((x Real)) (forall ((y Real)) (= (= (bool_lt x y) true) (< x y)))))
+  (forall ((x Real)) (forall ((y Real)) (= (= (bool_lt1 x y) true) (< x y)))))
 
 ;; bool_int__le_axiom
 (assert
   (forall ((x Real))
-    (forall ((y Real)) (= (= (bool_le x y) true) (or (< x y) (= x y))))))
+    (forall ((y Real)) (= (= (bool_le1 x y) true) (or (< x y) (= x y))))))
 
 ;; bool_gt_axiom
 (assert
-  (forall ((x Real)) (forall ((y Real)) (= (= (bool_gt x y) true) (< y x)))))
+  (forall ((x Real)) (forall ((y Real)) (= (= (bool_gt1 x y) true) (< y x)))))
 
 ;; bool_ge_axiom
 (assert
   (forall ((x Real))
-    (forall ((y Real)) (= (= (bool_ge x y) true) (or (< y x) (= y x))))))
+    (forall ((y Real)) (= (= (bool_ge1 x y) true) (or (< y x) (= y x))))))
 
 (declare-sort integer 0)
 
 ;; integer'int
 (declare-fun integerqtint (integer) Int)
+
+;; bool_eq
+(declare-fun bool_eq3 (Int
+  Int) Bool)
+
+;; bool_eq'def
+(assert
+  (forall ((x Int) (y Int))
+    (! (and
+         (=> (= x y) (= (bool_eq3 x y) true))
+         (=> (not (= x y)) (= (bool_eq3 x y) false))) :pattern ((bool_eq3
+                                                                  x
+                                                                  y)) )))
 
 ;; attr__ATTRIBUTE_IMAGE
 (declare-fun attr__ATTRIBUTE_IMAGE1 (Int) us_image)
@@ -284,6 +435,19 @@
 ;; natural'int
 (declare-fun naturalqtint (natural) Int)
 
+;; bool_eq
+(declare-fun bool_eq4 (Int
+  Int) Bool)
+
+;; bool_eq'def
+(assert
+  (forall ((x Int) (y Int))
+    (! (and
+         (=> (= x y) (= (bool_eq4 x y) true))
+         (=> (not (= x y)) (= (bool_eq4 x y) false))) :pattern ((bool_eq4
+                                                                  x
+                                                                  y)) )))
+
 ;; attr__ATTRIBUTE_IMAGE
 (declare-fun attr__ATTRIBUTE_IMAGE2 (Int) us_image)
 
@@ -307,6 +471,19 @@
   (natural__content a))
 
 (declare-sort float__ 0)
+
+;; bool_eq
+(declare-fun bool_eq5 (Float32
+  Float32) Bool)
+
+;; bool_eq'def
+(assert
+  (forall ((x Float32) (y Float32))
+    (! (and
+         (=> (fp.eq x y) (= (bool_eq5 x y) true))
+         (=> (not (fp.eq x y)) (= (bool_eq5 x y) false))) :pattern ((bool_eq5
+                                                                    x
+                                                                    y)) )))
 
 ;; user_eq
 (declare-fun user_eq2 (float__
@@ -335,7 +512,7 @@
 (declare-const n Int)
 
 ;; bool_eq
-(declare-fun bool_eq1 (Real
+(declare-fun bool_eq6 (Real
   Real) Bool)
 
 (declare-const value__size Int)
@@ -381,7 +558,7 @@
   Int) Bool)
 
 ;; bool_eq
-(declare-fun bool_eq2 (Int
+(declare-fun bool_eq7 (Int
   Int) Bool)
 
 (declare-const value__size1 Int)
@@ -445,12 +622,12 @@
 (assert
   (forall ((a Real))
     (! (=>
-         (= (bool_ge a (to_real1 0)) true)
+         (= (bool_ge1 a (to_real1 0)) true)
          (=>
            (real_square_root__function_guard (real_square_root a) a)
            (and
-             (= (bool_ge (real_square_root a) (to_real1 0)) true)
-             (= (bool_eq (* (real_square_root a) (real_square_root a)) a) true)))) :pattern (
+             (= (bool_ge1 (real_square_root a) (to_real1 0)) true)
+             (= (bool_eq2 (* (real_square_root a) (real_square_root a)) a) true)))) :pattern (
     (real_square_root
       a)) )))
 
@@ -483,6 +660,19 @@
            (or (< (- 2147483648) x1) (= (- 2147483648) x1))
            (or (< x1 2147483647) (= x1 2147483647)))
          (= (to_rep (of_rep x1)) x1)) :pattern ((to_rep (of_rep x1))) )))
+
+;; bool_eq
+(declare-fun bool_eq8 (Int
+  Int) Bool)
+
+;; bool_eq'def
+(assert
+  (forall ((x1 Int) (y Int))
+    (! (and
+         (=> (= x1 y) (= (bool_eq8 x1 y) true))
+         (=> (not (= x1 y)) (= (bool_eq8 x1 y) false))) :pattern ((bool_eq8
+                                                                    x1
+                                                                    y)) )))
 
 ;; attr__ATTRIBUTE_IMAGE
 (declare-fun attr__ATTRIBUTE_IMAGE4 (Int) us_image)
@@ -529,10 +719,7 @@
 (assert (fp.isFinite32 (fp #b0 #b01111111 #b00000000000000000000000)))
 
 ;; H
-(assert
-  (= (ite (= (ite true true false) true) (ite (or (< 1 n) (= 1 n))
-                                           true
-                                           false) false) true))
+(assert (=> (not (or (< 1 n) (= 1 n))) (= false true)))
 
 ;; Ensures
 (assert
@@ -561,30 +748,17 @@
     (real_square_root__function_guard
       (real_square_root (fp.to_real x))
       (fp.to_real x))
-    (=>
-      (real_square_root__function_guard
-        (real_square_root (fp.to_real x))
-        (fp.to_real x))
-      (=>
-        (real_square_root__function_guard
-          (real_square_root (fp.to_real x))
-          (fp.to_real x))
-        (=>
-          (real_square_root__function_guard
-            (real_square_root (fp.to_real x))
-            (fp.to_real x))
-          (= (bool_le
-               (ite (or
-                      (< 0.0 (+ (real_square_root (fp.to_real x)) (- (fp.to_real (fp.div RNE (fp.add RNE (fp #b0 #b01111111 #b00000000000000000000000) (fp.div RNE 
-                      x (fp #b0 #b01111111 #b00000000000000000000000))) (fp #b0 #b10000000 #b00000000000000000000000))))))
-                      (= 0.0 (+ (real_square_root (fp.to_real x)) (- (fp.to_real (fp.div RNE (fp.add RNE (fp #b0 #b01111111 #b00000000000000000000000) (fp.div RNE 
-                      x (fp #b0 #b01111111 #b00000000000000000000000))) (fp #b0 #b10000000 #b00000000000000000000000)))))))
-                 (+ (real_square_root (fp.to_real x)) (- (fp.to_real (fp.div RNE (fp.add RNE (fp #b0 #b01111111 #b00000000000000000000000) (fp.div RNE 
-                 x (fp #b0 #b01111111 #b00000000000000000000000))) (fp #b0 #b10000000 #b00000000000000000000000)))))
-                 (- (+ (real_square_root (fp.to_real x)) (- (fp.to_real (fp.div RNE (fp.add RNE (fp #b0 #b01111111 #b00000000000000000000000) (fp.div RNE 
-                 x (fp #b0 #b01111111 #b00000000000000000000000))) (fp #b0 #b10000000 #b00000000000000000000000)))))))
-               (+ (* (to_real1 1) (/ 1.0 (to_real1 (power 2 (power 2 1))))) (* 
-               (to_real1
-                 (* 3 1)) (* (to_real1 1) (/ 1.0 (to_real1 8388608)))))) true)))))))
+    (= (bool_le1
+         (ite (>= (+ (real_square_root (fp.to_real x)) (- (fp.to_real (fp.div RNE (fp.add RNE (fp #b0 #b01111111 #b00000000000000000000000) (fp.div RNE 
+         x (fp #b0 #b01111111 #b00000000000000000000000))) (fp #b0 #b10000000 #b00000000000000000000000))))) 0.0) (+ 
+         (real_square_root
+           (fp.to_real x)) (- (fp.to_real (fp.div RNE (fp.add RNE (fp #b0 #b01111111 #b00000000000000000000000) (fp.div RNE 
+         x (fp #b0 #b01111111 #b00000000000000000000000))) (fp #b0 #b10000000 #b00000000000000000000000))))) (- (+ 
+         (real_square_root
+           (fp.to_real x)) (- (fp.to_real (fp.div RNE (fp.add RNE (fp #b0 #b01111111 #b00000000000000000000000) (fp.div RNE 
+         x (fp #b0 #b01111111 #b00000000000000000000000))) (fp #b0 #b10000000 #b00000000000000000000000)))))))
+         (+ (* (to_real1 1) (/ 1.0 (to_real1 (power 2 (power 2 1))))) (* 
+         (to_real1
+           (* 3 1)) (* (to_real1 1) (/ 1.0 (to_real1 8388608)))))) true))))
 
 (check-sat)

@@ -708,7 +708,7 @@
 (assert (fp.isFinite32 h41))
 
 ;; Goal def'vc
-;; File "hie_sin.ads", line 71, characters 0-0
+;; File "hie_sin.ads", line 58, characters 0-0
 (assert
   (not
   (=>

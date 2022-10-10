@@ -561,7 +561,7 @@
   x) x) (fp #b0 #b10000000001 #b1000000000000000000000000000000000000000000000000000)))))
 
 ;; Goal def'vc
-;; File "taylor_sin.ads", line 16, characters 0-0
+;; File "taylor_sin.ads", line 15, characters 0-0
 (assert
   (not
   (=>

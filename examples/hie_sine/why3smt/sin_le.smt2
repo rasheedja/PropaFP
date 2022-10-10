@@ -1062,7 +1062,7 @@
           (= finalresult1 result__1))))))
 
 ;; Goal def'vc
-;; File "hie_sin.ads", line 83, characters 0-0
+;; File "hie_sin.ads", line 64, characters 0-0
 (assert
   (not
   (=>
