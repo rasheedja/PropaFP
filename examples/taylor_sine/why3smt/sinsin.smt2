@@ -7,8 +7,6 @@
 ;;; SMT-LIB2: real arithmetic
 (define-fun fp.isFinite32 ((x Float32)) Bool (not (or (fp.isInfinite x) (fp.isNaN x))))
 (define-fun fp.isIntegral32 ((x Float32)) Bool (or (fp.isZero x) (and (fp.isNormal x) (= x (fp.roundToIntegral RNE x)))))
-(define-fun fp.isFinite64 ((x Float64)) Bool (not (or (fp.isInfinite x) (fp.isNaN x))))
-(define-fun fp.isIntegral64 ((x Float64)) Bool (or (fp.isZero x) (and (fp.isNormal x) (= x (fp.roundToIntegral RNE x)))))
 (declare-sort string 0)
 
 (declare-datatypes ((tuple0 0))
@@ -226,146 +224,38 @@
 (declare-datatypes ((t__ref 0))
   (((t__refqtmk (t__content Float32)))))
 
-;; of_int
-(declare-fun of_int1 (RoundingMode
-  Int) Float64)
-
-;; to_int
-(declare-fun to_int2 (RoundingMode
-  Float64) Int)
-
-(declare-const max_int1 Int)
-
-;; bool_lt
-(declare-fun bool_lt1 (Float64
-  Float64) Bool)
-
-;; bool_lt'def
-(assert
-  (forall ((x Float64) (y Float64))
-    (! (and
-         (=> (fp.lt x y) (= (bool_lt1 x y) true))
-         (=> (not (fp.lt x y)) (= (bool_lt1 x y) false))) :pattern ((bool_lt1
-                                                                    x
-                                                                    y)) )))
-
-;; bool_le
-(declare-fun bool_le1 (Float64
-  Float64) Bool)
-
-;; bool_le'def
-(assert
-  (forall ((x Float64) (y Float64))
-    (! (and
-         (=> (fp.leq x y) (= (bool_le1 x y) true))
-         (=> (not (fp.leq x y)) (= (bool_le1 x y) false))) :pattern (
-    (bool_le1
-      x
-      y)) )))
-
-;; bool_gt
-(declare-fun bool_gt1 (Float64
-  Float64) Bool)
-
-;; bool_gt'def
-(assert
-  (forall ((x Float64) (y Float64))
-    (! (and
-         (=> (fp.lt y x) (= (bool_gt1 x y) true))
-         (=> (not (fp.lt y x)) (= (bool_gt1 x y) false))) :pattern ((bool_gt1
-                                                                    x
-                                                                    y)) )))
-
-;; bool_ge
-(declare-fun bool_ge1 (Float64
-  Float64) Bool)
-
-;; bool_ge'def
-(assert
-  (forall ((x Float64) (y Float64))
-    (! (and
-         (=> (fp.leq y x) (= (bool_ge1 x y) true))
-         (=> (not (fp.leq y x)) (= (bool_ge1 x y) false))) :pattern (
-    (bool_ge1
-      x
-      y)) )))
-
 ;; bool_eq
-(declare-fun bool_eq1 (Float64
-  Float64) Bool)
-
-;; bool_eq'def
-(assert
-  (forall ((x Float64) (y Float64))
-    (! (and
-         (=> (fp.eq x y) (= (bool_eq1 x y) true))
-         (=> (not (fp.eq x y)) (= (bool_eq1 x y) false))) :pattern ((bool_eq1
-                                                                    x
-                                                                    y)) )))
-
-;; bool_neq
-(declare-fun bool_neq1 (Float64
-  Float64) Bool)
-
-;; bool_neq'def
-(assert
-  (forall ((x Float64) (y Float64))
-    (! (and
-         (=> (not (fp.eq x y)) (= (bool_neq1 x y) true))
-         (=> (fp.eq x y) (= (bool_neq1 x y) false))) :pattern ((bool_neq1
-                                                                 x
-                                                                 y)) )))
-
-;; rem
-(declare-fun rem2 (Float64
-  Float64) Float64)
-
-;; one_is_int
-(assert
-  (fp.isIntegral64 (fp #b0 #b01111111111 #b0000000000000000000000000000000000000000000000000000)))
-
-;; one_of_int
-(assert
-  (= (fp #b0 #b01111111111 #b0000000000000000000000000000000000000000000000000000) 
-  (of_int1
-    RNA
-    1)))
-
-(declare-datatypes ((t__ref1 0))
-  (((t__refqtmk1 (t__content1 Float64)))))
-
-;; bool_eq
-(declare-fun bool_eq2 (Bool
+(declare-fun bool_eq1 (Bool
   Bool) Bool)
 
 ;; bool_eq'def
 (assert
   (forall ((x Bool) (y Bool))
     (! (and
-         (=> (= x y) (= (bool_eq2 x y) true))
-         (=> (not (= x y)) (= (bool_eq2 x y) false))) :pattern ((bool_eq2
+         (=> (= x y) (= (bool_eq1 x y) true))
+         (=> (not (= x y)) (= (bool_eq1 x y) false))) :pattern ((bool_eq1
                                                                   x
                                                                   y)) )))
 
 ;; to_int
-(declare-fun to_int3 (Bool) Int)
+(declare-fun to_int2 (Bool) Int)
 
 ;; to_int'def
 (assert
   (forall ((b Bool))
     (! (and
-         (=> (= b true) (= (to_int3 b) 1))
-         (=> (not (= b true)) (= (to_int3 b) 0))) :pattern ((to_int3 b)) )))
+         (=> (= b true) (= (to_int2 b) 1))
+         (=> (not (= b true)) (= (to_int2 b) 0))) :pattern ((to_int2 b)) )))
 
 ;; of_int
-(declare-fun of_int2 (Int) Bool)
+(declare-fun of_int1 (Int) Bool)
 
 ;; of_int'def
 (assert
   (forall ((i Int))
     (! (and
-         (=> (= i 0) (= (of_int2 i) false))
-         (=> (not (= i 0)) (= (of_int2 i) true))) :pattern ((of_int2 i)) )))
+         (=> (= i 0) (= (of_int1 i) false))
+         (=> (not (= i 0)) (= (of_int1 i) true))) :pattern ((of_int1 i)) )))
 
 ;; attr__ATTRIBUTE_IMAGE
 (declare-fun attr__ATTRIBUTE_IMAGE (Bool) us_image)
@@ -377,7 +267,7 @@
 (declare-fun attr__ATTRIBUTE_VALUE (us_image) Bool)
 
 ;; bool_eq
-(declare-fun bool_eq3 (Real
+(declare-fun bool_eq2 (Real
   Real) Bool)
 
 ;; bool_ne
@@ -385,24 +275,24 @@
   Real) Bool)
 
 ;; bool_lt
-(declare-fun bool_lt2 (Real
+(declare-fun bool_lt1 (Real
   Real) Bool)
 
 ;; bool_le
-(declare-fun bool_le2 (Real
+(declare-fun bool_le1 (Real
   Real) Bool)
 
 ;; bool_gt
-(declare-fun bool_gt2 (Real
+(declare-fun bool_gt1 (Real
   Real) Bool)
 
 ;; bool_ge
-(declare-fun bool_ge2 (Real
+(declare-fun bool_ge1 (Real
   Real) Bool)
 
 ;; bool_eq_axiom
 (assert
-  (forall ((x Real)) (forall ((y Real)) (= (= (bool_eq3 x y) true) (= x y)))))
+  (forall ((x Real)) (forall ((y Real)) (= (= (bool_eq2 x y) true) (= x y)))))
 
 ;; bool_ne_axiom
 (assert
@@ -411,34 +301,34 @@
 
 ;; bool_lt_axiom
 (assert
-  (forall ((x Real)) (forall ((y Real)) (= (= (bool_lt2 x y) true) (< x y)))))
+  (forall ((x Real)) (forall ((y Real)) (= (= (bool_lt1 x y) true) (< x y)))))
 
 ;; bool_int__le_axiom
 (assert
   (forall ((x Real))
-    (forall ((y Real)) (= (= (bool_le2 x y) true) (or (< x y) (= x y))))))
+    (forall ((y Real)) (= (= (bool_le1 x y) true) (or (< x y) (= x y))))))
 
 ;; bool_gt_axiom
 (assert
-  (forall ((x Real)) (forall ((y Real)) (= (= (bool_gt2 x y) true) (< y x)))))
+  (forall ((x Real)) (forall ((y Real)) (= (= (bool_gt1 x y) true) (< y x)))))
 
 ;; bool_ge_axiom
 (assert
   (forall ((x Real))
-    (forall ((y Real)) (= (= (bool_ge2 x y) true) (or (< y x) (= y x))))))
+    (forall ((y Real)) (= (= (bool_ge1 x y) true) (or (< y x) (= y x))))))
 
 (declare-sort float__ 0)
 
 ;; bool_eq
-(declare-fun bool_eq4 (Float32
+(declare-fun bool_eq3 (Float32
   Float32) Bool)
 
 ;; bool_eq'def
 (assert
   (forall ((x Float32) (y Float32))
     (! (and
-         (=> (fp.eq x y) (= (bool_eq4 x y) true))
-         (=> (not (fp.eq x y)) (= (bool_eq4 x y) false))) :pattern ((bool_eq4
+         (=> (fp.eq x y) (= (bool_eq3 x y) true))
+         (=> (not (fp.eq x y)) (= (bool_eq3 x y) false))) :pattern ((bool_eq3
                                                                     x
                                                                     y)) )))
 
@@ -464,45 +354,8 @@
 (define-fun float____ref_float____content__projection ((a float____ref)) float__
   (float____content a))
 
-(declare-sort long_float 0)
-
 ;; bool_eq
-(declare-fun bool_eq5 (Float64
-  Float64) Bool)
-
-;; bool_eq'def
-(assert
-  (forall ((x Float64) (y Float64))
-    (! (and
-         (=> (fp.eq x y) (= (bool_eq5 x y) true))
-         (=> (not (fp.eq x y)) (= (bool_eq5 x y) false))) :pattern ((bool_eq5
-                                                                    x
-                                                                    y)) )))
-
-;; user_eq
-(declare-fun user_eq1 (long_float
-  long_float) Bool)
-
-;; attr__ATTRIBUTE_IMAGE
-(declare-fun attr__ATTRIBUTE_IMAGE2 (Float64) us_image)
-
-;; attr__ATTRIBUTE_VALUE__pre_check
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check2 (us_image) Bool)
-
-;; attr__ATTRIBUTE_VALUE
-(declare-fun attr__ATTRIBUTE_VALUE2 (us_image) Float64)
-
-(declare-const dummy1 long_float)
-
-(declare-datatypes ((long_float__ref 0))
-  (((long_float__refqtmk (long_float__content long_float)))))
-
-;; long_float__ref_long_float__content__projection
-(define-fun long_float__ref_long_float__content__projection ((a long_float__ref)) long_float
-  (long_float__content a))
-
-;; bool_eq
-(declare-fun bool_eq6 (Real
+(declare-fun bool_eq4 (Real
   Real) Bool)
 
 (declare-const value__size Int)
@@ -521,10 +374,10 @@
 (assert (or (< 0 alignment) (= 0 alignment)))
 
 ;; user_eq
-(declare-fun user_eq2 (Real
+(declare-fun user_eq1 (Real
   Real) Bool)
 
-(declare-const dummy2 Real)
+(declare-const dummy1 Real)
 
 (declare-datatypes ((big_real__ref 0))
   (((big_real__refqtmk (big_real__content Real)))))
@@ -553,32 +406,32 @@
 (declare-fun integerqtint (integer) Int)
 
 ;; bool_eq
-(declare-fun bool_eq7 (Int
+(declare-fun bool_eq5 (Int
   Int) Bool)
 
 ;; bool_eq'def
 (assert
   (forall ((x Int) (y Int))
     (! (and
-         (=> (= x y) (= (bool_eq7 x y) true))
-         (=> (not (= x y)) (= (bool_eq7 x y) false))) :pattern ((bool_eq7
+         (=> (= x y) (= (bool_eq5 x y) true))
+         (=> (not (= x y)) (= (bool_eq5 x y) false))) :pattern ((bool_eq5
                                                                   x
                                                                   y)) )))
 
 ;; attr__ATTRIBUTE_IMAGE
-(declare-fun attr__ATTRIBUTE_IMAGE3 (Int) us_image)
+(declare-fun attr__ATTRIBUTE_IMAGE2 (Int) us_image)
 
 ;; attr__ATTRIBUTE_VALUE__pre_check
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check3 (us_image) Bool)
+(declare-fun attr__ATTRIBUTE_VALUE__pre_check2 (us_image) Bool)
 
 ;; attr__ATTRIBUTE_VALUE
-(declare-fun attr__ATTRIBUTE_VALUE3 (us_image) Int)
+(declare-fun attr__ATTRIBUTE_VALUE2 (us_image) Int)
 
 ;; user_eq
-(declare-fun user_eq3 (integer
+(declare-fun user_eq2 (integer
   integer) Bool)
 
-(declare-const dummy3 integer)
+(declare-const dummy2 integer)
 
 (declare-datatypes ((integer__ref 0))
   (((integer__refqtmk (integer__content integer)))))
@@ -588,7 +441,7 @@
   (integer__content a))
 
 ;; bool_eq
-(declare-fun bool_eq8 (Int
+(declare-fun bool_eq6 (Int
   Int) Bool)
 
 (declare-const value__size1 Int)
@@ -607,10 +460,10 @@
 (assert (or (< 0 alignment1) (= 0 alignment1)))
 
 ;; user_eq
-(declare-fun user_eq4 (Int
+(declare-fun user_eq3 (Int
   Int) Bool)
 
-(declare-const dummy4 Int)
+(declare-const dummy3 Int)
 
 (declare-datatypes ((big_integer__ref 0))
   (((big_integer__refqtmk (big_integer__content Int)))))
@@ -641,8 +494,6 @@
     (to_real1
       arg)) )))
 
-(declare-const x Float32)
-
 ;; real_sin
 (declare-fun real_sin (Real) Real)
 
@@ -665,42 +516,28 @@
          (and
            (and
              (and
-               (= (bool_le2
+               (= (bool_le1
                     (ite (>= (real_sin a) 0.0) (real_sin a) (- (real_sin a)))
                     (to_real1 1)) true)
                (=>
-                 (= (bool_eq3 a (to_real1 0)) true)
-                 (= (bool_eq3 (real_sin a) (to_real1 0)) true)))
+                 (= (bool_eq2 a (to_real1 0)) true)
+                 (= (bool_eq2 (real_sin a) (to_real1 0)) true)))
              (and
                (real_pi__function_guard (real_pi Tuple0) Tuple0)
                (=>
-                 (= (bool_eq3 a (real_pi Tuple0)) true)
-                 (= (bool_eq3 (real_sin a) (to_real1 0)) true))))
+                 (= (bool_eq2 a (real_pi Tuple0)) true)
+                 (= (bool_eq2 (real_sin a) (to_real1 0)) true))))
            (and
              (real_pi__function_guard (real_pi Tuple0) Tuple0)
              (=>
-               (= (bool_eq3
+               (= (bool_eq2
                     a
                     (* (* (to_real1 1) (/ 1.0 (to_real1 2))) (real_pi Tuple0))) true)
-               (= (bool_eq3 (real_sin a) (to_real1 1)) true))))) :pattern (
+               (= (bool_eq2 (real_sin a) (to_real1 1)) true))))) :pattern (
     (real_sin
       a)) )))
 
-(declare-const sqrt_epsilon_lf Float64)
-
-(declare-const g Float32)
-
-(declare-const h0 Float32)
-
-;; sqrt_epsilon_lf__def_axiom
-(assert
-  (= sqrt_epsilon_lf (fp #b0 #b01111100101 #b0000000000000000000000000000000000000000000000000000)))
-
-;; g__def_axiom
-(assert (= g (fp.mul RNE x x)))
-
-;; h0__def_axiom
-(assert (= h0 (fp.neg (fp #b0 #b01110010 #b10011000111110111001100))))
+(declare-const x Float32)
 
 ;; real_pi__post_axiom
 (assert
@@ -708,52 +545,27 @@
     (! (=>
          (real_pi__function_guard (real_pi us_void_param) us_void_param)
          (and
-           (= (bool_ge2
+           (= (bool_ge1
                 (real_pi us_void_param)
                 (* (to_real 7074237752028440) (/ 1.0 (to_real 2251799813685248)))) true)
-           (= (bool_le2
+           (= (bool_le1
                 (real_pi us_void_param)
                 (* (to_real 7074237752028441) (/ 1.0 (to_real 2251799813685248)))) true))) :pattern (
     (real_pi
       us_void_param)) )))
 
-(declare-const result__ Float32)
+(declare-const onesin Float32)
 
-(declare-const h1 Float32)
-
-(declare-const h2 Float32)
+(declare-const twosin Float32)
 
 ;; Assume
 (assert (fp.isFinite32 x))
 
 ;; Assume
 (assert
-  (=>
-    (or
-      (= false true)
-      (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
-    (fp.isFinite32 result__)))
-
-;; Assume
-(assert
   (and
-    (fp.leq (fp.neg (fp #b0 #b01111110 #b10100010001101010111010)) x)
-    (fp.leq x (fp #b0 #b01111110 #b10100010001101010111010))))
-
-;; Assume
-(assert (fp.isFinite64 sqrt_epsilon_lf))
-
-;; Ensures
-(assert (fp.isFinite32 (fp.mul RNE x x)))
-
-;; Assume
-(assert (= (fp.mul RNE x x) g))
-
-;; Assume
-(assert (fp.isFinite32 g))
-
-;; Assume
-(assert (fp.isFinite32 h0))
+    (fp.leq (fp.neg (fp #b0 #b01111110 #b00000000000000000000000)) x)
+    (fp.leq x (fp #b0 #b01111110 #b00000000000000000000000))))
 
 ;; Assume
 (assert true)
@@ -764,7 +576,7 @@
     (or
       (= false true)
       (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
-    (fp.isFinite32 h1)))
+    (fp.isFinite32 onesin)))
 
 ;; Assume
 (assert true)
@@ -775,75 +587,83 @@
     (or
       (= false true)
       (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
-    (fp.isFinite32 h2)))
+    (fp.isFinite32 twosin)))
 
-(declare-const h11 Float32)
-
-;; H
-(assert (fp.leq (fp.neg (fp #b0 #b10000010 #b10000000000000000000000)) h11))
-
-;; H
-(assert (fp.leq h11 (fp #b0 #b10000010 #b10000000000000000000000)))
+(declare-const onesin1 Float32)
 
 ;; H
 (assert
-  (fp.eq h11 (fp.add RNE (fp.mul RNE h0 g) (fp #b0 #b01111000 #b00010001000001100000010))))
-
-;; H
-(assert (fp.isFinite32 h11))
-
-(declare-const h21 Float32)
-
-;; H
-(assert (fp.leq (fp.neg (fp #b0 #b10000010 #b10000000000000000000000)) h21))
-
-;; H
-(assert (fp.leq h21 (fp #b0 #b10000010 #b10000000000000000000000)))
+  (= (bool_ge1
+       (fp.to_real onesin1)
+       (* (to_real1 (- 48)) (/ 1.0 (to_real1 100)))) true))
 
 ;; H
 (assert
-  (fp.eq h21 (fp.add RNE (fp.mul RNE h11 g) (fp.neg (fp #b0 #b01111100 #b01010101010101010100000)))))
-
-;; H
-(assert (fp.isFinite32 h21))
-
-(declare-const result__1 Float32)
+  (= (bool_le1 (fp.to_real onesin1) (* (to_real1 48) (/ 1.0 (to_real1 100)))) true))
 
 ;; H
 (assert
   (and
-    (=>
-      (or
-        (fp.leq (fp.abs x) (fp #b0 #b01100101 #b00000000000000000000000))
-        (and
-          (not
-            (fp.leq (fp.abs x) (fp #b0 #b01100101 #b00000000000000000000000)))
-          (= false true)))
-      (= result__1 x))
-    (=>
-      (not
-        (=>
-          (not
-            (fp.leq (fp.abs x) (fp #b0 #b01100101 #b00000000000000000000000)))
-          (= false true)))
-      (and
-        (fp.isFinite32 (fp.mul RNE h21 g))
-        (and
-          (fp.isFinite32 (fp.mul RNE x (fp.mul RNE h21 g)))
-          (and
-            (fp.isFinite32 (fp.add RNE (fp.mul RNE x (fp.mul RNE h21 
-            g)) x))
-            (= result__1 (fp.add RNE (fp.mul RNE x (fp.mul RNE h21 g)) 
-            x))))))))
+    (real_sin__function_guard (real_sin (fp.to_real x)) (fp.to_real x))
+    (= (bool_le1
+         (ite (>= (+ (real_sin (fp.to_real x)) (- (fp.to_real onesin1))) 0.0) (+ 
+         (real_sin
+           (fp.to_real x)) (- (fp.to_real onesin1))) (- (+ (real_sin
+                                                             (fp.to_real 
+                                                             x)) (- (fp.to_real 
+         onesin1)))))
+         (* (to_real1 25889) (/ 1.0 (to_real1 100000000)))) true)))
+
+;; H
+(assert (fp.isFinite32 onesin1))
+
+(declare-const twosin1 Float32)
+
+;; H
+(assert
+  (= (bool_ge1
+       (fp.to_real twosin1)
+       (* (to_real1 (- 48)) (/ 1.0 (to_real1 100)))) true))
+
+;; H
+(assert
+  (= (bool_le1 (fp.to_real twosin1) (* (to_real1 48) (/ 1.0 (to_real1 100)))) true))
+
+;; H
+(assert
+  (and
+    (real_sin__function_guard
+      (real_sin (fp.to_real onesin1))
+      (fp.to_real onesin1))
+    (= (bool_le1
+         (ite (>= (+ (real_sin (fp.to_real onesin1)) (- (fp.to_real twosin1))) 0.0) (+ 
+         (real_sin
+           (fp.to_real onesin1)) (- (fp.to_real twosin1))) (- (+ (real_sin
+                                                                   (fp.to_real 
+                                                                   onesin1)) (- (fp.to_real 
+         twosin1)))))
+         (* (to_real1 25889) (/ 1.0 (to_real1 100000000)))) true)))
+
+;; H
+(assert (fp.isFinite32 twosin1))
 
 ;; Goal def'vc
-;; File "hie_sin.ads", line 52, characters 0-0
+;; File "taylor_sin.ads", line 27, characters 0-0
 (assert
   (not
   (=>
     (real_sin__function_guard (real_sin (fp.to_real x)) (fp.to_real x))
-    (= (bool_le2
-         (+ (fp.to_real result__1) (- (real_sin (fp.to_real x))))
-         (* (to_real1 1) (/ 1.0 (to_real1 100000)))) true))))
+    (=>
+      (real_sin__function_guard (real_sin (fp.to_real x)) (fp.to_real x))
+      (=>
+        (real_sin__function_guard
+          (real_sin (real_sin (fp.to_real x)))
+          (real_sin (fp.to_real x)))
+        (= (bool_le1
+             (ite (>= (+ (real_sin (real_sin (fp.to_real x))) (- (fp.to_real 
+             twosin1))) 0.0) (+ (real_sin (real_sin (fp.to_real x))) (- (fp.to_real 
+             twosin1))) (- (+ (real_sin (real_sin (fp.to_real x))) (- (fp.to_real 
+             twosin1)))))
+             (* (to_real1 51778) (/ 1.0 (to_real1 100000000)))) true))))))
 
 (check-sat)

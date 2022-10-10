@@ -1260,6 +1260,7 @@ normalizeBoolean form =
     -- aggressiveSimplify (FConn Or f@(FConn And y (FNot x')) x) = if x P.== x' then aggressiveSimplify (FConn Or x y) else (FConn Or (aggressiveSimplify f) (aggressiveSimplify x))
     aggressiveSimplify f = f
 
+    -- Eliminate implications and distribute FNots
     -- aux (FConn Or x f@(FConn And (FNot x') y)) = if x P.== x' then FConn And x y else FConn Or (aux x) (aux f)
     aux (FConn Impl x y) = aux $ FConn Or (FNot x) y
     aux (FNot f@(FConn Impl x y)) = aux (FNot (aux f))
