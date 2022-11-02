@@ -4,7 +4,7 @@ PropaFP is a tool used for auto-active verification of Floating-Point programs.
 PropaFP can be used for the verification of [SPARK][1]/[Ada][2] floating-point programs and is integrated with [GNAT Studio 2022](https://www.adacore.com/gnatpro/toolsuite/gnatstudio).
 
 PropaFP can take some Verification Condition (VC), and if PropaFP understands the VC, simplify it, derive bounds for variables, and safely eliminate floating-point operations using over-approximations on rounding errors.
-A more detailed description of PropaFP can be found in [this paper](https://arxiv.org/abs/2207.00921).
+A more detailed description of PropaFP can be found in [this paper](https://link.springer.com/chapter/10.1007/978-3-031-17108-6_2) ([arXiv version](https://arxiv.org/abs/2207.00921)).
 
 Below is a diagram summarising the integration with PropaFP and SPARK.
 
@@ -15,9 +15,9 @@ Below is a diagram summarising the integration with PropaFP and SPARK.
 
 ## Requirements
 
-All PropaFP executables require the [FPTaylor v0.9.3](https://github.com/soarlab/FPTaylor/releases/tag/v0.9.3) executable in your $PATH.
+All PropaFP executables require the [FPTaylor v0.9.4](https://github.com/soarlab/FPTaylor/tree/efbbc83970fe3c9f4cb33fafbbe1050dd18749cd) executable in $PATH.
 
-The 'propafp-run-$prover' executables require you to have $prover installed (but not necessarily in your $PATH).
+The 'propafp-run-$prover' executables require the $prover to be installed (but not necessarily in $PATH).
 
 To build PropaFP, we recommend [Stack](https://docs.haskellstack.org/en/stable/README/). We have built PropaFP with Stack version 2.7.5.
 
@@ -27,7 +27,7 @@ To build PropaFP, we recommend [Stack](https://docs.haskellstack.org/en/stable/R
 - cd into the repo
 - Run `stack build`
 
-Stack will then build the project and tell you where the PropaFP executables have been placed.
+Stack will then build the project and state where the PropaFP executables have been placed.
 
 ### Supported Provers
 
@@ -59,14 +59,14 @@ If PropaFP does not understand the VC, it writes an empty file.
 #### Runner Executables
 
 'Runner' executables take some input file, transform the VC as described above, and calls the prover on the transformed VC.
-'Runner' executables require the prover for each executable to be in your $PATH.
+'Runner' executables require the prover for each executable to be in $PATH.
 The current 'runner' executables are:
 
 - propafp-run-dreal      -f [smtFileContainingVC.smt2] -p [pathToDReal]
 - propafp-run-lppaver    -f [smtFileContainingVC.smt2] -p [pathToLPPaver]
 - propafp-run-metitarski -f [smtFileContainingVC.smt2] -p [pathToMetiTarski]
 
-To run LPPaver in a mode specialised to find counter-examples, you can pass the -c option.
+To run LPPaver in a mode specialised to find counter-examples, pass the -c option.
 
 ### PropaFP with GNAT Studio
 

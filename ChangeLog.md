@@ -2,6 +2,8 @@
 
 ## Unreleased changes
 
+- Polish documentation
+
 ## [v0.1.1.0](https://github.com/rasheedja/PropaFP/compare/v0.1.0.0...v0.1.1.0)
 
 - Remove quotes from FPTaylor variables, allowing support for FPTaylor >=0.9.3
