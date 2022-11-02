@@ -3,6 +3,8 @@
 ## Unreleased changes
 
 - Polish documentation
+- Update tests for FPTaylor v0.9.4
+  - v0.9.4 is much faster in some cases and produces slightly different (often slightly better) bounds.
 
 ## [v0.1.1.0](https://github.com/rasheedja/PropaFP/compare/v0.1.0.0...v0.1.1.0)
 
