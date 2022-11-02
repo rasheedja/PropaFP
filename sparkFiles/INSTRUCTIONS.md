@@ -75,7 +75,7 @@ Before calling PropaFP in GNAT Studio, we recommend calling the split_goal_wp_co
 We recommend giving a high timeout for PropaFP executables.
 To set a timeout of 10 minutes, you can enter `propafp-lppaver 600`.
 
-## Real numbers in SPARK Specifications
+## Real Functions in SPARK Specifications
 
-To use real numbers in SPARK specifications, use our axiomatic specification found [here](Reals.ads).
+To use real functions such as sine in SPARK specifications, use our axiomatic specification found [here](../examples/spark/src/reals.ads).
 See [examples/spark](../examples/spark) for examples on how to use this module.
