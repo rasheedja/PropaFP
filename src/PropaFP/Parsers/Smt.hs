@@ -792,7 +792,7 @@ deriveVCRanges vc varsWithTypes =
         (Just ff1, Just ff2) -> Just $ FConn Or ff1 ff2
         (_, _)               -> Nothing
     filterOutVars (FConn Impl f1 f2) vars False =
-      case (filterOutVars f1 vars False, filterOutVars f2 vars False) of
+      case (filterOutVars f1 vars True, filterOutVars f2 vars False) of
         (Just ff1, Just ff2) -> Just $ FConn Impl ff1 ff2
         (_, _)               -> Nothing
     filterOutVars (FConn And f1 f2) vars True =
@@ -806,9 +806,9 @@ deriveVCRanges vc varsWithTypes =
         (_, Just ff2)        -> Just ff2
         (_, _)               -> Nothing
     filterOutVars (FConn Impl f1 f2) vars True =
-      case (filterOutVars f1 vars True, filterOutVars f2 vars True) of
+      case (filterOutVars f1 vars False, filterOutVars f2 vars True) of
         (Just ff1, Just ff2) -> Just $ FConn Impl ff1 ff2
-        (Just ff1, _)        -> Just ff1
+        (Just ff1, _)        -> Just $ FNot ff1
         (_, Just ff2)        -> Just ff2
         (_, _)               -> Nothing
     filterOutVars (FNot f) vars isNegated = FNot <$> filterOutVars f vars (not isNegated)
