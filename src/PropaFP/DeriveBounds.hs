@@ -335,7 +335,8 @@ evalE ::
   (Ring v, CanDivSameType v, CanPowBy v Integer,
    CanMinMaxSameType v, CanAbsSameType v, 
    CanPowBy v v, CanSqrtSameType v, CanSinCosSameType v,
-   IsInterval v, CanAddThis v Integer, HasDyadics v, CanMinMaxSameType (IntervalEndpoint v), _
+   IsInterval v, CanAddThis v Integer, HasDyadics v, CanMinMaxSameType (IntervalEndpoint v),
+   v ~ CN MPBall 
   ) 
   =>
   (Rational -> v) ->
