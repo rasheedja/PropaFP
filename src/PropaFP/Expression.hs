@@ -6,8 +6,10 @@ import MixedTypesNumPrelude
 
 import qualified Prelude as P
 
+import Control.DeepSeq (NFData)
 import qualified Data.Map as Map
 import Data.List (nub, delete)
+import GHC.Generics (Generic)
 
 import Test.QuickCheck
 
@@ -18,18 +20,19 @@ import PropaFP.VarMap
 import AERN2.Normalize (CanNormalize(normalize))
 
 data BinOp = Add | Sub | Mul | Div | Min | Max | Pow | Mod
-  deriving (Show, P.Eq, P.Ord)
+  deriving (Show, P.Eq, P.Ord, Generic, NFData)
 data UnOp  = Sqrt | Negate | Abs | Sin | Cos
-  deriving (Show, P.Eq, P.Ord)
+  deriving (Show, P.Eq, P.Ord, Generic, NFData)
 
-data RoundingMode = RNE | RTP | RTN | RTZ | RNA deriving (Show, P.Eq, P.Ord)
+data RoundingMode = RNE | RTP | RTN | RTZ | RNA deriving (Show, P.Eq, P.Ord, Generic, NFData)
 -- | The E type represents the inequality: expression :: E >= 0
 -- TODO: Add rounding operator with certain epsilon/floating-point type
 data E = EBinOp BinOp E E | EUnOp UnOp E | Lit Rational | Var String | PowI E Integer | Float32 RoundingMode E | Float64 RoundingMode E | Float RoundingMode E | Pi | RoundToInteger RoundingMode E
-  deriving (Show, P.Eq, P.Ord)
+  deriving (Show, P.Eq, P.Ord, Generic, NFData)
 
 data ESafe = EStrict E | ENonStrict E
-  deriving (Show, P.Eq, P.Ord)
+  deriving (Show, P.Eq, P.Ord, Generic, NFData)
+
 data Comp = Gt | Ge | Lt | Le | Eq
   deriving (Show, P.Eq, P.Ord)
 

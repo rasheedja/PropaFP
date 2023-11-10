@@ -1,5 +1,5 @@
 name:                PropaFP
-version:             0.2.0.0
+version:             0.2.1.0
 github:              "rasheedja/PropaFP"
 license:             MPL-2.0
 author:              "Junaid Rasheed"
@@ -37,6 +37,7 @@ dependencies:
 - process >= 1.6.13.2 && < 1.7
 - directory >= 1.3.6.2 && < 1.4
 - optparse-applicative >= 0.17.1.0 && < 0.18
+- deepseq >= 1.4.8 && < 1.5
 
 default-extensions:
 - RebindableSyntax,
@@ -49,6 +50,8 @@ default-extensions:
 - FlexibleContexts,
 - FlexibleInstances,
 - UndecidableInstances
+- DeriveGeneric
+- DeriveAnyClass
 
 library:
   source-dirs: src
